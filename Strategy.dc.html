@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design brief and open decisions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+.h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:28px;line-height:1.15;color:#0C3063;margin:0 0 6px;letter-spacing:-0.01em}
+.lede{font-size:16px;line-height:1.6;color:#3F4A5C;margin:0 0 22px;max-width:760px}
+.sec{padding:44px 0 8px;border-top:1px solid #C3CAD6}
+.t{font-size:15.5px;line-height:1.55;color:#1A2433;margin:0 0 10px}
+.t b{font-weight:700}
+.col{flex:1 1 300px;min-width:0}
+.cap{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3F4A5C;margin:0 0 8px}
+.num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:22px;color:#0C3063;flex:none;width:34px}
+.row{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #E1E5EC}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:#0C3063;border:1.5px solid #0C3063;border-radius:999px;padding:2px 10px;margin-right:8px;white-space:nowrap}
+</style>
+</helmet>
+
+<div style="font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:#1A2433;background:#fff;min-height:100%">
+<div style="max-width:1100px;margin:0 auto;padding:56px 40px 72px">
+
+  <img src="logo.png" alt="LoanAmerica" style="height:48px;width:auto;margin-left:-6px">
+  <div class="cap" style="margin-top:28px">Design brief</div>
+  <h1 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:46px;line-height:1.08;letter-spacing:-0.02em;color:#0C3063;margin:0 0 16px;max-width:860px">The easiest student loan application we can build.</h1>
+  <p class="lede" style="font-size:18px">Few questions, prefilled wherever we can, and no surprises about credit checks. It has to feel easy to a student fresh out of high school and calm and respectful to a grandparent asked to cosign. The two phones on this canvas are working prototypes of the student and the cosigner journeys, rebuilt after the SoFi, College Ave and Earnest reviews. The drafted legal text is plugged in where each piece belongs, and this page holds the reasoning and the decisions still open.</p>
+
+  <div class="sec">
+    <h2 class="h2">What we kept, changed and dropped</h2>
+    <p class="lede">Emre's reaction was to the pacing and the roadmap. That points to SoFi's rhythm and Earnest's up-front honesty, with College Ave's cosigner mechanics and disclosure timing underneath.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <div class="cap">From SoFi</div>
+        <p class="t"><b>Kept.</b> The first screen that asks for the person's information straight away, with the student or cosigner tap. The birthday and citizenship questions. The loan period with a Most popular tag. The consent pop-up from a link, the soft check line in bold, the plain explanation for the Social Security number, and the reminder emails.</p>
+        <p class="t"><b>Changed.</b> The cosigner is offered, never pushed, and the answer to the income question decides how it is raised. Income is asked in words that are easy to say yes to. Housing is simpler: rent, own, or stay with friends or family for free.</p>
+        <p class="t"><b>Dropped.</b> Credit score monitoring, the broad consent to future products, and any pressure pop-up.</p>
+      </div>
+      <div class="col">
+        <div class="cap">From Earnest</div>
+        <p class="t"><b>Kept.</b> Its honesty about where the soft check ends. A review page with an Edit option on each section. A dashboard with status and document upload, used later when we need more. The idea of putting all partner wording in one place. Explaining how the phone number is used.</p>
+        <p class="t"><b>Changed.</b> A short first step for name, email and phone so we always have a lead, then prefill, instead of one long form. A text code instead of a password. No second round of questions after sign-in.</p>
+        <p class="t"><b>Dropped.</b> Account creation with an email and password, the school search, degree and program questions, and the five business day wait.</p>
+      </div>
+      <div class="col">
+        <div class="cap">From College Ave</div>
+        <p class="t"><b>Kept.</b> The automatic loan amount calculation, with the requested amount capped at what is calculated and information buttons beside each line. The confirm step. The early placement of the disclosure. The yes or no cosigner choice that opens a box. The school form for every student.</p>
+        <p class="t"><b>Changed.</b> Tuition and fees only, because we do not lend for books or living costs. Cosigner invite by text, with a way to get the steps and share them later. The e-sign wording no longer suggests the loan is already granted.</p>
+        <p class="t"><b>Dropped.</b> Entry screens, the new or existing account question, and the long borrower form.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Twelve decisions that remove friction</h2>
+    <p class="lede">Each one is visible in the prototype. Open the student phone and press Play.</p>
+    <div style="display:flex;flex-wrap:wrap;column-gap:48px">
+      <div class="col" style="flex-basis:440px">
+        <div class="row"><div class="num">1</div><div><p class="t" style="margin:0"><b>The school sends them.</b> The link carries the school and its cost estimate, so there is no school search and no program quiz.</p></div></div>
+        <div class="row"><div class="num">2</div><div><p class="t" style="margin:0"><b>No password.</b> A text code signs them in and brings them back. A passkey can follow later.</p></div></div>
+        <div class="row"><div class="num">3</div><div><p class="t" style="margin:0"><b>Few screens, prefilled.</b> Name, email and phone first, so we always have a lead. Then a code, then one page that confirms what we filled in. Eight screens to a rate, and the legal gates sit on the screens where they apply.</p></div></div>
+        <div class="row"><div class="num">4</div><div><p class="t" style="margin:0"><b>The right keyboard every time.</b> Number pad for numbers, email keyboard for email, and browser autofill hints on every field.</p></div></div>
+        <div class="row"><div class="num">5</div><div><p class="t" style="margin:0"><b>Fields format themselves.</b> Phone, birthday, SSN and dollars add their own punctuation. No format errors to fix.</p></div></div>
+        <div class="row"><div class="num">6</div><div><p class="t" style="margin:0"><b>One button, same place.</b> Fixed at the bottom, in thumb reach, and it wakes up when the screen is complete.</p></div></div>
+      </div>
+      <div class="col" style="flex-basis:440px">
+        <div class="row"><div class="num">7</div><div><p class="t" style="margin:0"><b>Big targets and bigger text.</b> Choices are full-width cards at least 60 pixels tall, and an Aa button at the top makes everything larger in one tap. Built for a grandparent as much as a student.</p></div></div>
+        <div class="row"><div class="num">8</div><div><p class="t" style="margin:0"><b>Help and legal text in sheets.</b> A link slides up the full text and leaves the form exactly as it was. A plain summary always sits on the screen itself.</p></div></div>
+        <div class="row"><div class="num">9</div><div><p class="t" style="margin:0"><b>Autosave, visibly.</b> A Saved mark and a text link to resume. Leaving never costs anyone their work.</p></div></div>
+        <div class="row"><div class="num">10</div><div><p class="t" style="margin:0"><b>SSN only if needed.</b> Asked only when our identity check cannot match, next to a plain reason and a statement of what is a soft check and what is not.</p></div></div>
+        <div class="row"><div class="num">11</div><div><p class="t" style="margin:0"><b>Edit and return.</b> Fixing a detail from the review screen brings them straight back to review.</p></div></div>
+        <div class="row"><div class="num">12</div><div><p class="t" style="margin:0"><b>Always know what is next.</b> After submit, every step shows who is doing what, in order, with a place to add documents later if we ask. No five day waits.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">The path</h2>
+    <p class="lede">The order follows the drafted disclosure suite: the combined consent first, then the Application and Solicitation Disclosure on the same first page, then the application, then the Approval Disclosure, the school form, the loan agreement and the Final Disclosure. Target: about 3 minutes to a rate. The time on each screen is an estimate to calibrate in testing.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <div class="cap">Eight screens to a rate</div>
+        <p class="t">Start: student or cosigner, name, email, phone, one combined consent, and the rates and fees block. Text code. Is this you, with birthday, address and citizenship prefilled. Income, with the cosigner question. Amount, calculated for them. Review, with Edit on each line. Credit check, with the SSN only if needed. Bank connection.</p>
+        <p class="t">Then the rate. If a cosigner is needed and was not already invited, the same slot offers one, as an option. If we cannot confirm something, it becomes a request for documents. No account step, and no second round of questions.</p>
+      </div>
+      <div class="col">
+        <div class="cap">After the rate</div>
+        <p class="t">Lock in, with its own hard inquiry authorization. Approval Disclosure and accept. School self-certification. Loan agreement and Privacy Notice. Status tracker, with the Final Disclosure and the 3 business day cancel window. Optional marketing opt-in last.</p>
+        <p class="t"><b>Not designed yet.</b> Decline and expired-link screens, and the Final Disclosure itself.</p>
+      </div>
+      <div class="col">
+        <div class="cap">The cosigner</div>
+        <p class="t">A text arrives, written so nobody feels pushed. The first screen says in plain words what cosigning means, that they can say no, and that a person can walk them through it. One combined consent, then the Notice to Cosigner on its own screen. A page that confirms details we filled in, an income question that counts Social Security and pensions, and their credit check. Larger text is one tap away. The student is told right away.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Consents: never more than one decision per box</h2>
+    <p class="lede">The drafted consent bundle says each consent has its own legal basis and must be its own control, with no master checkbox and none pre-checked. The answer is not a wall of boxes. It is the right box on the screen where the decision happens.</p>
+    <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1.5px solid #0C3063"><div class="cap" style="flex:1.2;margin:0">Consent</div><div class="cap" style="flex:1;margin:0">Where it appears</div><div class="cap" style="flex:2;margin:0">Why it stands alone</div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Combined start consent</b></p></div><div style="flex:1"><p class="t" style="margin:0">First screen, one box</p></div><div style="flex:2"><p class="t" style="margin:0">Terms and Privacy Notice, electronic paperwork, calls and texts with the partners named, and the school release, in one pop-up. A paper option sits beside it. <span class="tag">Counsel to confirm what may be combined</span></p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Rates, costs and fees</b></p></div><div style="flex:1"><p class="t" style="margin:0">First screen, compressed block</p></div><div style="flex:2"><p class="t" style="margin:0">The Application and Solicitation Disclosure, electronic and on the same page, with no PDF. It opens after the box above is checked, can be emailed or printed, and is grouped and set apart from everything else. <span class="tag">Counsel to confirm</span></p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Credit and income verification</b></p></div><div style="flex:1"><p class="t" style="margin:0">Credit check screen</p></div><div style="flex:2"><p class="t" style="margin:0">The page names no one. The linked consent names Equifax, states the written instruction, says soft now and hard later, and allows us to ask for more documents.</p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Bank connection</b></p></div><div style="flex:1"><p class="t" style="margin:0">Bank screen</p></div><div style="flex:2"><p class="t" style="margin:0">Names the data provider, Equifax and Prism and says how each uses the data. It is a different purpose from a credit pull. Prism appears only here.</p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Hard credit check</b></p></div><div style="flex:1"><p class="t" style="margin:0">Lock-in screen</p></div><div style="flex:2"><p class="t" style="margin:0">Separate on purpose, with the score warning. Never implied by the soft check.</p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Cosigner Notice</b></p></div><div style="flex:1"><p class="t" style="margin:0">Its own cosigner screen</p></div><div style="flex:2"><p class="t" style="margin:0">Shown in full, in bold, and acknowledged on its own before the cosigner is obligated. It follows a plain-words explanation, and nothing is final until later.</p></div></div>
+    <div class="row"><div style="flex:1.2"><p class="t" style="margin:0"><b>Offers and marketing</b></p></div><div style="flex:1"><p class="t" style="margin:0">After submit, optional</p></div><div style="flex:2"><p class="t" style="margin:0">Cannot be a condition of the loan, so it is optional, unchecked, and last.</p></div></div>
+    <p class="t" style="margin-top:16px">The draft loan agreement recommends no arbitration clause. If counsel chooses otherwise, it appears in full at signing and not in a sign-up box. <span class="tag">Counsel to decide</span></p>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Equifax, Prism and requests for more documents</h2>
+    <p class="lede">These came from the Equifax consumer schedule, the Prism Data addendum and the October 9 consent review. Paragraphs added for them carry a [NEW] tag in the legal text, so counsel can find them.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <div class="cap">Equifax credit pulls</div>
+        <p class="t">The credit authorization names Equifax Information Services LLC and states that it is the borrower's written instruction, which is one of the permissible purposes in the Equifax schedule. It lists the purposes: evaluating the application, verifying it, and later reviewing, servicing and collecting.</p>
+        <p class="t">It says plainly that checking the rate is a soft inquiry and that locking in is a hard inquiry. It covers the adverse action notice, with Equifax's name and the 60 day free report, and reporting the loan to Equifax. <span class="tag">Confirm Equifax's current address and number</span></p>
+        <p class="t">Vermont requires consent specific to the purpose of each pull. The authorization is written purpose by purpose to fit that.</p>
+      </div>
+      <div class="col">
+        <div class="cap">Prism and bank data</div>
+        <p class="t">The bank connection consent names Prism Data Technologies, Inc. through Equifax, and says the bank transactions are used to produce a cash flow score that informs the decision and the rate.</p>
+        <p class="t">The addendum lets Equifax and Prism use the data, in aggregated or de-identified form, to test and improve their services. The consent says so in plain words. <span class="tag">Confirm against the executed addendum</span></p>
+        <p class="t">The addendum also has us warrant that we hold every consent needed to send them the data. This screen is that consent.</p>
+      </div>
+      <div class="col">
+        <div class="cap">Asking for more</div>
+        <p class="t">The credit authorization now says that if we cannot confirm identity, income, employment or enrollment, we may ask for more information or documents, may contact the sources the borrower named, and may be unable to finish if they are not provided. The same point appears in plain words on the screen.</p>
+        <p class="t">A third outcome on the prototype shows the request itself: ID, proof of income and bank statements, each added with a tap. A route for someone who cannot connect a bank is built in.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">An assistant that helps people ask the right questions</h2>
+    <p class="lede">It does not replace the screens. It sits beside them, explains in plain words, and shows what is worth asking next. In the prototype every answer is written by hand and cites the document it came from. In production it is a model that may only answer from approved text.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <div class="cap">How it works</div>
+        <p class="t">Guide, a named assistant with a face, sits in thumb reach on every screen and opens a sheet over the form, so nothing is lost. On a computer it stays docked beside the form.</p>
+        <p class="t">It opens with questions suited to the screen. Each answer cites its source document, adds a plain Heads up line where something could trip the person, and ends with the next questions as tappable cards. The card chosen stays marked, and the others fade.</p>
+        <p class="t">When Guide can do something, such as text a link to finish on a phone, it says exactly what it will do and waits for a yes. If the person says stop, it confirms that nothing was sent or changed.</p>
+        <p class="t">A thumbs up or down on each answer, a microphone for speaking a question, and a Learn tab that holds the whole library by topic.</p>
+        <p class="t">At decision points a Worth asking card appears on its own: the amount, the bank connection, the rate, the approval and the loan agreement.</p>
+      </div>
+      <div class="col">
+        <div class="cap">What it never does</div>
+        <p class="t">Make or predict credit decisions. Choose an amount or a repayment option for someone. Give personal financial advice. Discourage anyone from applying.</p>
+        <p class="t">Take an SSN or a bank login. If someone types one, it stops them and points to the secure field.</p>
+        <p class="t">Answer from outside the approved documents. When it does not know, it says so and hands off to a person with the chat attached.</p>
+        <p class="t">Hide that it is AI.</p>
+      </div>
+      <div class="col">
+        <div class="cap">What it needs underneath</div>
+        <p class="t">A versioned library of approved answers, each tied to a legal or program document, reviewed by compliance before release.</p>
+        <p class="t">The chat saved with the application and treated as a consumer communication, with retention set. The model vendor reviewed as a service provider that handles borrower data.</p>
+        <p class="t">A scripted test set run before every release, plus a fair lending review of the content and the logs.</p>
+      </div>
+    </div>
+    <div class="cap" style="margin-top:12px">Where it leads: the financial literacy platform</div>
+    <p class="t" style="max-width:820px">It is the same engine and the same library. Every question we write becomes a content asset. The questions people ask show where borrowers are confused, which tells us which guides to write and which screens to fix. After funding, it can meet people at the moments that matter, such as the first payment, the end of a grace period and a change of address.</p>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">On a computer</h2>
+    <p class="lede">The computer version is not the phone stretched wide. People on a keyboard can take more on one page, see where they are, and read the full legal text without opening anything. It is the same flow, the same legal text and the same assistant, in a layout built for a larger screen.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <div class="cap">Three columns</div>
+        <p class="t">A steps rail on the left shows every stage, what is done, and the time left. The form sits in the middle at a readable width. Guide is docked on the right and is always there, not behind a button.</p>
+        <p class="t">Below roughly 1180 pixels the assistant folds into an Ask button, and below 860 the rail becomes a thin progress bar. The phone version stays the primary design for small screens.</p>
+      </div>
+      <div class="col">
+        <div class="cap">Fewer pages, same care</div>
+        <p class="t">Eight pages to a rate. The start page holds the role, name, email, phone, the combined consent and the rates and fees block. Birthday, address and citizenship share one confirm page, and income and the cosigner question share another. Every consent still sits next to what it covers.</p>
+        <p class="t">Legal text is shown inline. The loan disclosure opens beside its summary, with the full text in a scroll box. The credit and bank authorizations expand in place.</p>
+      </div>
+      <div class="col">
+        <div class="cap">Made for a keyboard</div>
+        <p class="t">Enter advances when a page is complete. Fields are labeled and tab in a sensible order, and every control shows a clear focus ring.</p>
+        <p class="t">A code on the steps rail lets someone move to their phone in one scan. In the prototype it is a sample and does not scan. Documents can be added from the computer or sent from a phone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Built for a thumb, tested for everyone</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;margin-top:16px">
+      <div class="col">
+        <p class="t"><b>Inputs are 16 pixels or larger</b>, so iPhones do not zoom in when a field is tapped.</p>
+        <p class="t"><b>Labels sit above fields</b> and never disappear. A placeholder is an example, not a label.</p>
+        <p class="t"><b>Text meets 4.5 to 1 contrast.</b> Errors and states use an icon and words, never color alone.</p>
+      </div>
+      <div class="col">
+        <p class="t"><b>Screen readers</b> get a labeled progress bar, a polite announcement while the rate loads, and labeled sheets.</p>
+        <p class="t"><b>Reduced motion</b> is respected. Nothing animates for animation's sake.</p>
+        <p class="t"><b>Production build:</b> first field focused on every screen, Enter advances, the button rides above the keyboard.</p>
+      </div>
+      <div class="col">
+        <p class="t"><b>Plain words.</b> Short sentences, second person, no program or underwriting detail in the copy.</p>
+        <p class="t"><b>Next:</b> Spanish, dark mode, and a reading level check on every screen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Measure it before we trust it</h2>
+    <p class="lede">We have no baseline yet, so no targets. Instrument these from day one, and test with 5 to 8 students on their own phones before the build and again after it.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px">
+      <div class="col">
+        <p class="t">Completion and time on each screen.</p>
+        <p class="t">Text code success on the first try.</p>
+        <p class="t">Address picked from a suggestion versus typed by hand.</p>
+      </div>
+      <div class="col">
+        <p class="t">Drop-off on the electronic consent, SSN and bank screens.</p>
+        <p class="t">How many people open the full consent text, and how long they stay.</p>
+        <p class="t">Rate shown to lock-in conversion.</p>
+      </div>
+      <div class="col">
+        <p class="t">Cosigner invite to cosigner completion, and how long it takes.</p>
+        <p class="t">How often we ask for documents, and how many people send them.</p>
+        <p class="t">Resume link use, and support questions by screen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Gates before anything is built</h2>
+    <p class="lede">This is a design prototype. Every legal paragraph comes from drafts marked not approved for borrower use. Counsel review comes first, and no counsel is engaged on this flow today.</p>
+    <div class="row"><div class="num">1</div><p class="t" style="margin:0">Open merge fields show in [BRACKETS], such as the creditor, the servicer and the rate range. They are the drafts' own blanks, not placeholders we invented.</p></div>
+    <div class="row"><div class="num">2</div><p class="t" style="margin:0">The 2.39% on the rate screen is a sample so the screen can be judged. It is not an offer. A rate shown in a borrower flow carries the full Reg Z and UDAAP treatment.</p></div>
+    <div class="row"><div class="num">3</div><p class="t" style="margin:0">Every student signs the school self-certification form, which is decided. The drafted suite says its Reg Z forms apply only at Title IV schools, but the regulation text ties the rule to institutions of higher education as the Higher Education Act defines them. Counsel to confirm which of our schools qualify and which disclosure set applies if one does not. <span class="tag">Open</span></p></div>
+    <div class="row"><div class="num">4</div><p class="t" style="margin:0">The suite names who the creditor is as the first stop-ship item, and the Terms specimen names a bank partner as the lender. The screens use the LoanAmerica brand and leave the creditor fields bracketed. <span class="tag">Open</span></p></div>
+    <div class="row"><div class="num">5</div><p class="t" style="margin:0">The soft pull statement is only true if every Equifax request in the flow is a soft inquiry. The October 9 review rates it high exposure. It must be checked against the actual Equifax request configuration. <span class="tag">High exposure</span></p></div>
+    <div class="row"><div class="num">6</div><p class="t" style="margin:0">The tracker says the borrower has 3 business days to cancel after the Final Disclosure. <span class="tag">Likely</span>This follows Reg Z Subpart F, 12 CFR 1026.48. Confirm the wording and timing.</p></div>
+    <div class="row"><div class="num">7</div><p class="t" style="margin:0">The H-18 and H-19 drafts carry NMLS and license lines. They are left out here, per the standing rule, and counsel decides what the forms must show. The only lender identity line is American Originations LLC (dba LoanAmerica).</p></div>
+    <div class="row"><div class="num">8</div><p class="t" style="margin:0">Whether the Prism bank-data product is a consumer report is still open in the drafts, and it decides the adverse action wording and Consent B. The servicer's legal name is also unresolved.</p></div>
+    <div class="row"><div class="num">9</div><p class="t" style="margin:0">A bank partner may set disclosure placement and consent wording. FinWise materials were not touched.</p></div>
+    <div class="row"><div class="num">10</div><p class="t" style="margin:0">The assistant is AI. It must say so, stay inside explanation, and never decide, predict or steer. The planned posting statement that we do not use AI to review applications stays true only if that holds. <span class="tag">Compliance to confirm</span></p></div>
+  </div>
+
+  <div class="sec" style="margin-top:36px">
+    <h2 class="h2">Decisions we still need</h2>
+    <div style="display:flex;flex-wrap:wrap;column-gap:48px">
+      <div class="col" style="flex-basis:440px">
+        <div class="row"><div class="num">1</div><p class="t" style="margin:0"><b>Is the rate check a soft check?</b> Everything here assumes yes. Needs input from credit and risk, and from the bank partner.</p></div>
+        <div class="row"><div class="num">2</div><p class="t" style="margin:0"><b>School link only, or an open page too?</b> The path depends on the school link. An open page adds school search and program questions.</p></div>
+        <div class="row"><div class="num">3</div><p class="t" style="margin:0"><b>School classification.</b> Which schools are institutions of higher education under the Act? Add that as a field to school approval, so the school's page decides the disclosure set.</p></div>
+        <div class="row"><div class="num">4</div><p class="t" style="margin:0"><b>Cosigner credit check.</b> Soft or hard? The cosigner screen leaves it open.</p></div>
+        <div class="row"><div class="num">5</div><p class="t" style="margin:0"><b>A rate before the hard check.</b> The prototype shows one. Confirm with counsel and the bank partner.</p></div>
+        <div class="row"><div class="num">6</div><p class="t" style="margin:0"><b>Bank data provider.</b> The drafts name Plaid and the vendor list has moved on. Name the provider so the consent can.</p></div>
+      </div>
+      <div class="col" style="flex-basis:440px">
+        <div class="row"><div class="num">7</div><p class="t" style="margin:0"><b>Housing.</b> It is used to calculate debt to income on the back end, so it comes back in a simpler form: rent, own, or stay with friends or family for free, then the monthly payment only if they rent or own.</p></div>
+        <div class="row"><div class="num">8</div><p class="t" style="margin:0"><b>Passwordless sign-in.</b> Check against the bank partner's security requirements.</p></div>
+        <div class="row"><div class="num">9</div><p class="t" style="margin:0"><b>Decline, expired-link and Final Disclosure screens.</b> Next on the build list. The decline notices are drafted in the suite.</p></div>
+        <div class="row"><div class="num">10</div><p class="t" style="margin:0"><b>Affiliate sharing.</b> The Privacy Notice assumes no sharing with affiliates. That is Carrie's call and it changes the notice.</p></div>
+        <div class="row"><div class="num">11</div><p class="t" style="margin:0"><b>Rate hold.</b> The screens say nothing about how long a rate is held. Decide, then add one line.</p></div>
+        <div class="row"><div class="num">12</div><p class="t" style="margin:0"><b>Spanish.</b> Worth planning now so no screen is built around English-only copy.</p></div>
+        <div class="row"><div class="num">13</div><p class="t" style="margin:0"><b>Assistant name, vendor and hosting.</b> Who runs the model, where borrower data goes, and what the contract says about reuse of chats.</p></div>
+        <div class="row"><div class="num">14</div><p class="t" style="margin:0"><b>Chat retention.</b> How long chats are kept, and whether they join the consent record.</p></div>
+        <div class="row"><div class="num">15</div><p class="t" style="margin:0"><b>Handoff and content ownership.</b> Who answers when the assistant hands off, during what hours, and who approves the learning library.</p></div>
+        <div class="row"><div class="num">16</div><p class="t" style="margin:0"><b>What Guide may do, not just say.</b> Texting a link is shown with an approve-first gate. Any further action needs the same gate and a review.</p></div>
+        <div class="row"><div class="num">17</div><p class="t" style="margin:0"><b>Name and look.</b> Guide is a working name with a simple face. Pick the real name and character with the brand.</p>
+        <div class="row"><div class="num">18</div><p class="t" style="margin:0"><b>Prefill source.</b> Which vendor can fill in the birthday and address from a phone number, and which fields does it actually return? The Is this you page depends on it.</p></div>
+        <div class="row"><div class="num">19</div><p class="t" style="margin:0"><b>Cosigner flow wording and counsel.</b> The invitation text, the plain-words cosigner page and the 'nothing is final yet' line need review. Confirm the notice timing for cosigners.</p></div>
+        <div class="row"><div class="num">20</div><p class="t" style="margin:0"><b>Combined consent.</b> Counsel to confirm that the terms, privacy, electronic paperwork, calls and texts, and school release can be one consent. The credit check, the bank connection and marketing stay separate.</p></div>
+        <div class="row"><div class="num">21</div><p class="t" style="margin:0"><b>Partners named on the phone consent.</b> The list of who may call or text is saved in the product folder. Decide whether to name each partner or use a short line with the full list one tap away.</p></div>
+        <div class="row"><div class="num">22</div><p class="t" style="margin:0"><b>Rates and fees on the first page.</b> Confirm the compressed block meets Reg Z form rules for electronic delivery, including a way to keep a copy, and that it opens only after the electronic consent.</p></div>
+        <div class="row"><div class="num">23</div><p class="t" style="margin:0"><b>School year and graduation date.</b> SoFi's review liked them for timing consolidation outreach. Earnest's review said that level of detail is not needed. The prototype shows the program and expected finish as read-only, taken from the school.</p></div>
+        <div class="row"><div class="num">24</div><p class="t" style="margin:0"><b>State loan amount limits.</b> Minimum and maximum amounts by state, and whether the cap is full tuition or tuition minus other aid. The prototype caps at tuition minus other aid. Needs research.</p></div>
+        <div class="row"><div class="num">25</div><p class="t" style="margin:0"><b>Social proof lines.</b> Showing how many people pick an option needs our own real numbers with a source and date. None exist before launch, so the prototype shows none.</p></div>
+        <div class="row"><div class="num">26</div><p class="t" style="margin:0"><b>Dependents question.</b> Parked as a possible back end question. Credit and counsel to review how it is asked and used under Regulation B.</p></div>
+        <div class="row"><div class="num">27</div><p class="t" style="margin:0"><b>How much to ask.</b> Carrie's view is to prefill and confirm wherever possible. Emre's view is still to be recorded. The test for every question: can it be prefilled, read from the credit report or bank data, or inferred?</p></div>
+        <div class="row"><div class="num">28</div><p class="t" style="margin:0"><b>Decision speed.</b> Earnest says five business days, which is far too long. Set a target we can keep, and only promise that.</p></div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;line-height:1.6;color:#3F4A5C;margin:40px 0 0;max-width:820px;border-top:1px solid #C3CAD6;padding-top:16px">Method: principles drawn from Jakob Nielsen's ten usability heuristics, Don Norman's work on feedback and signifiers, and Luke Wroblewski's research on mobile forms. Competitor observations come from the Earnest, SoFi and College Ave screenshots supplied, which show test data. Legal text comes from the Reg Z Disclosures suite, the Terms of Use vr4 specimen, the Equifax consumer schedule, the Prism Data addendum and the October 9 consent review. All names, amounts and rates in the prototypes are sample data.</p>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1100,"height":8600}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

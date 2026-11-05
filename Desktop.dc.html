@@ -1,0 +1,1488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Student application on a computer</title>
+<script src="./support.js"></script>
+<script src="./legal.js"></script>
+<script src="./assistant.js"></script>
+<script>window.GUIDE_OFF = "all"; // Guide assistant and left step list removed from every screen</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+.h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:38px;line-height:1.12;letter-spacing:-0.015em;color:#0C3063;margin:0}
+.h3{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:22px;line-height:1.2;color:#0C3063;margin:0}
+.sub{font-size:18px;line-height:1.55;color:#3F4A5C;margin:12px 0 0;max-width:640px}
+.lbl{display:block;font-size:14px;font-weight:700;color:#1A2433;margin:0 0 6px}
+.hint{font-size:14px;line-height:1.45;color:#3F4A5C;margin:8px 0 0}
+.inp{width:100%;height:52px;border:1.5px solid #7C8799;border-radius:12px;background:#fff;padding:0 16px;font-family:inherit;font-size:17px;color:#1A2433}
+.inp::placeholder{color:#6B7587}
+.inp:focus{outline:none;border-color:#0C3063;box-shadow:0 0 0 3px rgba(12,48,99,.2)}
+.btn{min-width:200px;height:52px;border:0;border-radius:12px;background:#0C3063;color:#fff;font-size:17px;font-weight:700;padding:0 28px}
+.btn:hover:not(:disabled){background:#0A2850}
+.btn:disabled{background:#DCE1E9;color:#5E6879;cursor:not-allowed}
+.btn2{height:48px;border:1.5px solid #0C3063;border-radius:12px;background:#fff;color:#0C3063;font-size:16px;font-weight:700;padding:0 22px}
+.btn2:hover{background:#EAF0FA}
+.btn:focus-visible,.btn2:focus-visible,.opt:focus-visible,.link:focus-visible,.pill:focus-visible,.chip:focus-visible,.srcbtn:focus-visible,.step:focus-visible,.askfab:focus-visible,.iconbtn:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.link{background:none;border:0;padding:0;color:#0C3063;font-size:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.opt{flex:1;min-height:56px;display:flex;align-items:center;gap:10px;text-align:left;padding:10px 16px;border:1.5px solid #7C8799;border-radius:12px;background:#fff;font-size:16px;font-weight:600;color:#1A2433}
+.opt:hover{border-color:#0C3063}
+.opt.sel{border:2px solid #0C3063;background:#EAF0FA;padding:9.5px 15.5px}
+.card{background:#fff;border-radius:18px;padding:24px;border:1px solid #E1E5EC}
+.pill{border:1.5px solid #0C3063;background:#fff;color:#0C3063;border-radius:999px;padding:0 16px;height:40px;font-size:14.5px;font-weight:700}
+.pill.sel{background:#0C3063;color:#fff}
+.step{width:48px;height:48px;border-radius:24px;border:1.5px solid #0C3063;background:#fff;color:#0C3063;display:flex;align-items:center;justify-content:center;flex:none}
+.sug{width:100%;min-height:48px;text-align:left;padding:10px 16px;border:0;border-bottom:1px solid #E1E5EC;background:#fff;font-size:16px;color:#1A2433}
+.sug:hover{background:#EAF0FA}
+.chk{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;line-height:1.5;color:#1A2433}
+.sum{font-size:16px;line-height:1.55;color:#1A2433;display:flex;flex-direction:column;gap:10px}
+.num{width:30px;height:30px;border-radius:15px;background:#0C3063;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.kv{display:flex;justify-content:space-between;gap:16px}
+.kv span{color:#3F4A5C}
+.seg{display:flex;gap:4px;background:#E6EAF0;border-radius:14px;padding:4px}
+.segbtn{flex:1;border:0;background:transparent;border-radius:11px;padding:8px 10px;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#3F4A5C;cursor:pointer}
+.segbtn.sel{background:#fff;color:#0C3063;box-shadow:0 1px 3px rgba(12,48,99,.18)}
+.segl{font-size:15.5px;font-weight:700}
+.segs{font-size:12.5px;font-weight:500;color:#3F4A5C}
+.segbtn:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.sech{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:24px;line-height:1.2;color:#0C3063;margin:0}
+.amtinp{width:100%;box-sizing:border-box;height:auto;padding:6px 14px;border:1.5px solid #C3CAD6;border-radius:14px;background:#fff;font-family:'Fraunces',Georgia,serif;font-weight:600;color:#0C3063;letter-spacing:-0.02em;text-align:center}
+.amtinp:hover{border-color:#7C8799}
+.amtinp:focus{outline:none;border-color:#0C3063;box-shadow:0 0 0 3px rgba(12,48,99,.18)}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.offers{grid-template-columns:1fr}}
+.offer{display:flex;flex-direction:column;gap:10px;width:100%;text-align:left;padding:16px 18px;border:1.5px solid #7C8799;border-radius:16px;background:#fff;color:#1A2433;cursor:pointer;font-family:inherit}
+.offer:hover{border-color:#0C3063}
+.offer.sel{border:2px solid #0C3063;background:#EAF0FA;padding:15.5px 17.5px}
+.offer:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.offer-rate{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:34px;line-height:1;color:#0C3063;letter-spacing:-0.01em}
+.offer-pay{font-size:17px;font-weight:700;color:#1A2433}
+.offer-meta{font-size:13.5px;line-height:1.45;color:#3F4A5C}
+.celebrate{position:relative}
+.confetti{position:absolute;right:0;top:-8px;width:140px;height:80px;pointer-events:none;animation:confetti 1s ease both}
+@keyframes confetti{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
+.cele-badge{display:inline-flex;align-items:center;gap:6px;background:#EAF7EF;color:#1E6B43;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700}
+.cap{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3F4A5C}
+.chip{border:1.5px solid #0C3063;background:#fff;color:#0C3063;border-radius:14px;padding:9px 12px;font-size:14px;font-weight:600;text-align:left;min-height:44px;line-height:1.35;width:100%}
+.chip:hover{background:#EAF0FA}
+.srcbtn{border:1.5px solid #C3CAD6;background:#F5F6F9;color:#0C3063;border-radius:999px;padding:0 14px;min-height:40px;font-size:13.5px;font-weight:700}
+.iconbtn{width:44px;height:44px;border:0;background:none;border-radius:22px;display:flex;align-items:center;justify-content:center;color:#0C3063}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row2{display:flex;gap:12px}
+.shell{display:grid;grid-template-columns:250px minmax(0,1fr) 350px;gap:32px;max-width:1380px;margin:0 auto;padding:28px 32px 72px;align-items:start}
+.rail{position:sticky;top:20px}
+.aside{position:sticky;top:20px;height:calc(100vh - 40px);max-height:820px;min-height:560px;background:#fff;border:1px solid #E1E5EC;border-radius:18px;display:flex;flex-direction:column;overflow:hidden}
+.shell.noguide{grid-template-columns:minmax(0,1fr)!important;max-width:820px}
+.noguide .rail{display:none!important}
+.noguide .mrail{display:block!important}
+.noguide .aside,.askfab.noguide{display:none!important}
+.askfab{display:none;position:fixed;right:20px;bottom:20px;z-index:35;align-items:center;gap:8px;height:52px;padding:0 22px 0 18px;border-radius:26px;border:1.5px solid #0C3063;background:#fff;color:#0C3063;font-size:16px;font-weight:700;box-shadow:0 8px 24px rgba(12,48,99,.25)}
+.mrail{display:none}
+input[type=range]{width:100%;height:40px;accent-color:#0C3063;margin:0}
+input[type=checkbox]{width:24px;height:24px;accent-color:#0C3063;flex:none;margin:2px 0 0}
+input[type=checkbox]:disabled{opacity:.4}
+@media (max-width:1180px){
+  .shell{grid-template-columns:230px minmax(0,1fr)}
+  .aside{display:none}
+  .aside.open{display:flex;position:fixed;right:20px;bottom:84px;top:auto;width:380px;height:min(640px,calc(100vh - 110px));z-index:40;box-shadow:0 16px 48px rgba(10,20,40,.3)}
+  .askfab{display:flex}
+}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr;padding:16px 16px 96px}
+  .rail{display:none}
+  .mrail{display:block}
+  .aside.open{left:12px;right:12px;width:auto}
+  .g2{grid-template-columns:1fr}
+  .h1{font-size:30px}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.choice{width:100%;display:flex;align-items:center;gap:10px;text-align:left;min-height:48px;padding:9px 14px;border-radius:12px;font-size:14.5px;font-weight:600;line-height:1.35;font-family:inherit}
+.choice.live{border:1.5px solid #0C3063;background:#fff;color:#0C3063}
+.choice.live:hover{background:#EAF0FA}
+.choice.pickd{border:2px solid #0C3063;background:#EAF0FA;color:#0C3063;cursor:default}
+.choice.gone{border:1.5px dashed #C3CAD6;background:transparent;color:#6B7587;cursor:default}
+.choice:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.screen{animation:pop .25s ease both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Round 35 polish */
+.burst{position:absolute;left:50%;top:70px;width:0;height:0;pointer-events:none;z-index:5}
+.burst i{position:absolute;left:0;top:0;opacity:0;animation:burst 3.2s cubic-bezier(.15,.75,.35,1) forwards}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(.4) rotate(0)}22%{opacity:1;transform:translate(calc(var(--dx) * .75),var(--up)) scale(1) rotate(calc(var(--r) * .35))}80%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--fall)) scale(1) rotate(var(--r));visibility:hidden}}
+@keyframes confetti{0%{opacity:0;transform:translateY(10px) scale(.9)}15%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0;visibility:hidden}}
+.confetti{animation:confetti 3s ease forwards!important}
+@media (prefers-reduced-motion:reduce){.burst{display:none}}
+.opt.rec{border:2px solid #2E8B57;background:#F1FAF4;padding:9.5px 15.5px;animation:recpulse 1.6s ease 2}
+.opt.rec.sel{border-color:#0C3063;background:#EAF0FA;animation:none}
+.recpill{background:#2E8B57;color:#fff;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;letter-spacing:.02em}
+@keyframes recpulse{0%,100%{box-shadow:0 0 0 0 rgba(46,139,87,0)}50%{box-shadow:0 0 0 6px rgba(46,139,87,.22)}}
+@media (max-width:600px){.confetti{width:92px;height:52px;top:-18px}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:background .15s ease,transform .08s ease,box-shadow .15s ease}
+.btn:not(:disabled){box-shadow:0 6px 16px rgba(12,48,99,.22)}
+.btn:not(:disabled)::after{content:"\2192";font-size:1.15em;line-height:1}
+.btn:not(:disabled):active{transform:translateY(1px)}
+.opt,.offer,.segbtn,.btn2{transition:border-color .15s ease,background .15s ease,box-shadow .15s ease}
+.opt.sel,.offer.sel{box-shadow:0 4px 14px rgba(12,48,99,.12)}
+.chk .link{display:inline;text-align:left}
+.chk input[type=checkbox]{cursor:pointer}
+.trust{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.trust span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;background:#EAF7EF;color:#1E6B43;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:700}
+@media (max-width:600px){
+  .trust{gap:4px}
+  .trust span{font-size:11px;padding:4px 7px;gap:3px;letter-spacing:-.01em}
+  .trust span svg{width:12px;height:12px}
+  .hdr-in{padding:10px 16px!important}
+  .hdr-in img{height:32px!important}
+  .saved-txt{display:none!important}
+  form.card{padding:26px 18px 22px!important;gap:22px!important;border-radius:16px}
+  .h1{font-size:28px}
+  .sub{font-size:16.5px}
+  .row2{flex-direction:column}
+  .btn{width:100%;min-width:0}
+  .rrow{flex-wrap:wrap;gap:4px 12px!important}
+  .rlbl{width:100%!important}
+  .shell{padding:12px 12px 72px!important}
+}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F5F6F9;font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:#1A2433">
+
+  <header style="background:#fff;border-bottom:1px solid #E1E5EC">
+    <div class="hdr-in" style="max-width:1380px;margin:0 auto;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <img src="logo.png" alt="LoanAmerica" style="height:40px;width:auto">
+      <div style="display:flex;align-items:center;gap:24px;font-size:14.5px;font-weight:600;color:#3F4A5C">
+        <sc-if value="{{ showSaved }}" hint-placeholder-val="{{ false }}">
+          <span class="saved-txt" style="display:flex;align-items:center;gap:6px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            Progress saved
+          </span>
+        </sc-if>
+        <button type="button" class="link" style="font-size:14.5px" onClick="{{ openHelp }}">Talk to a person</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell {{ guideCls }}">
+
+    <nav class="rail" aria-label="Application steps">
+      <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div>
+            <div class="cap">{{ stageName }}</div>
+            <div style="font-size:14px;color:#3F4A5C;margin-top:4px">{{ timeLeft }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <sc-for list="{{ railGroups }}" as="g" hint-placeholder-count="5">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:{{ g.color }};margin-bottom:6px">{{ g.name }}</div>
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+                    <div aria-current="{{ it.cur }}" style="display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;font-size:14.5px;font-weight:{{ it.weight }};color:{{ it.color }};background:{{ it.bg }}">
+                      <span style="width:18px;height:18px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;border:2px solid {{ it.ring }};background:{{ it.fill }};color:#fff">
+                        <sc-if value="{{ it.done }}" hint-placeholder-val="{{ false }}">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                        </sc-if>
+                      </span>
+                      {{ it.label }}
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div class="card" style="padding:16px;display:flex;gap:14px;align-items:center">
+            <svg width="64" height="64" viewBox="0 0 25 25" aria-hidden="true" style="flex:none"><path d="{{ qr }}" fill="#0C3063" fill-rule="evenodd"/></svg>
+            <div style="font-size:13px;line-height:1.4;color:#3F4A5C"><strong style="color:#1A2433">Prefer your phone?</strong> Scan to pick up right here. Sample code, not scannable.</div>
+          </div>
+        </div>
+      </sc-if>
+    </nav>
+
+    <main style="min-width:0">
+
+      <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+        <div class="mrail" style="margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:#3F4A5C;margin-bottom:6px"><span>{{ stageName }}</span><span>{{ timeLeft }}</span></div>
+          <div style="display:flex;gap:5px">
+            <sc-for list="{{ segs }}" as="sg" hint-placeholder-count="4">
+              <div style="flex:1;height:5px;border-radius:3px;background:#DCE1E9;overflow:hidden"><div style="height:100%;width:{{ sg.fill }};background:#0C3063"></div></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <form onSubmit="{{ submit }}" class="card screen" style="padding:40px 44px 36px;display:flex;flex-direction:column;gap:28px">
+
+        <sc-if value="{{ is.start }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div style="align-self:flex-start;display:flex;align-items:center;gap:8px;background:#F5F6F9;border:1px solid #E1E5EC;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg>
+              Sent by {{ school }}
+            </div>
+            <div>
+              <h1 class="h1" style="font-size:44px">Your loan offer starts here.</h1>
+              <p class="sub">Answer a few quick questions and we'll show you offers made just for you.</p>
+          <div class="trust"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> No credit impact</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> About 3 minutes</span><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Progress saved</span></div>
+            </div>
+            <sc-if value="{{ roleStudent }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:22px">
+                <div class="g2">
+                  <div>
+                    <label class="lbl" for="d-first">First name</label>
+                    <input id="d-first" class="inp" type="text" autocomplete="given-name" value="{{ first }}" onChange="{{ onFirst }}">
+                  </div>
+                  <div>
+                    <label class="lbl" for="d-last">Last name</label>
+                    <input id="d-last" class="inp" type="text" autocomplete="family-name" value="{{ last }}" onChange="{{ onLast }}">
+                  </div>
+                  <div>
+                    <label class="lbl" for="d-email">Email</label>
+                    <input id="d-email" class="inp" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value="{{ email }}" onChange="{{ onEmail }}">
+                  </div>
+                  <div>
+                    <label class="lbl" for="d-phone">Mobile number</label>
+                    <input id="d-phone" class="inp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(555) 555-0123" value="{{ phone }}" onChange="{{ onPhone }}">
+                    <p class="hint">We'll text you a code to sign in. No password to remember.</p>
+                  </div>
+                </div>
+                <div>
+                  <label class="lbl" for="d-cit">Citizenship status</label>
+                  <select id="d-cit" class="inp" value="{{ cit }}" onChange="{{ onCit }}" style="cursor:pointer"><option value="">Choose one</option><option value="citizen">U.S. citizen</option><option value="national">U.S. national</option><option value="resident">Permanent resident (green card holder)</option><option value="visa">Visa holder (for example F-1 or H-1B)</option><option value="other">Other / none of these</option></select>
+                </div>
+                <label class="chk">
+                  <input type="checkbox" checked="{{ agree }}" onChange="{{ toggleAgree }}">
+                  <span>I agree to the <button type="button" class="link" style="font-size:15.5px" onClick="{{ openTerms }}">Terms of Use</button> and I've been given the <button type="button" class="link" style="font-size:15.5px" onClick="{{ openPrivacy }}">Privacy Notice</button>. I agree to get my paperwork electronically, to calls and texts about my application, and to my school sharing my enrollment details with LoanAmerica. <button type="button" class="link" style="font-size:15.5px" onClick="{{ openCombined }}">See what this covers</button> Rather use paper? <button type="button" class="link" style="font-size:15.5px" onClick="{{ openPaper }}">Apply on paper instead</button></span>
+                </label>
+              </div>
+            </sc-if>
+            <div style="font-size:13px;line-height:1.5;color:#3F4A5C">American Originations LLC (dba LoanAmerica). Check federal aid first, because federal loans can carry protections private loans do not. <button type="button" class="link" style="font-size:13px" onClick="{{ openFederal }}">Learn more</button></div>
+          </div>
+        </sc-if>
+
+
+
+        <sc-if value="{{ is.ineligible }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:600px">
+        <div style="width:56px;height:56px;border-radius:28px;background:#EAF0FA;color:#0C3063;display:flex;align-items:center;justify-content:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div>
+          <h1 class="h1">We're sorry, {{ first }}.</h1>
+          <p class="sub">We can't offer you a loan right now. At this time, LoanAmerica loans are available only to U.S. citizens, U.S. nationals and permanent residents.</p>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:12px">
+          <div class="cap">What you can do next</div>
+          <div style="display:flex;gap:12px;font-size:15.5px;line-height:1.5"><span style="width:8px;height:8px;border-radius:4px;background:#0C3063;flex:none;margin-top:8px"></span><span><strong>Talk to your school's financial aid office.</strong> They can help you find other ways to pay for your program.</span></div>
+          <div style="display:flex;gap:12px;font-size:15.5px;line-height:1.5"><span style="width:8px;height:8px;border-radius:4px;background:#0C3063;flex:none;margin-top:8px"></span><span><strong>Look for scholarships and grants</strong> that are open to students with your status.</span></div>
+          <div style="display:flex;gap:12px;font-size:15.5px;line-height:1.5"><span style="width:8px;height:8px;border-radius:4px;background:#0C3063;flex:none;margin-top:8px"></span><span><strong>Come back anytime.</strong> If your status changes, you're welcome to apply again.</span></div>
+        </div>
+        <p class="hint" style="margin:0">Picked the wrong option? <button type="button" class="link" style="font-size:14px" onClick="{{ back }}">Go back and change it</button></p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ is.code }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px;max-width:600px">
+            <div>
+              <h1 class="h1">Enter the code sent to your phone.</h1>
+              <p class="sub">We texted a 6-digit code to {{ phone }}. It can take a few seconds to arrive.</p>
+            </div>
+            <div>
+              <label class="lbl" for="d-code">6-digit code</label>
+              <input id="d-code" class="inp" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" value="{{ code }}" onChange="{{ onCode }}" style="max-width:460px;font-size:28px;letter-spacing:.35em;text-align:center;font-weight:700;height:64px">
+              <p class="hint">Prototype: any 6 digits will work.</p>
+            </div>
+            <div style="display:flex;gap:24px;font-size:15px">
+              <button type="button" class="link" onClick="{{ resend }}">Send a new code</button>
+              <button type="button" class="link" onClick="{{ back }}">Wrong number?</button>
+            </div>
+          </div>
+        </sc-if>
+
+
+        <sc-if value="{{ is.confirm }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <h1 class="h1">Is this you, {{ first }}?</h1>
+              <p class="sub">We filled in what we could. Fix anything that's off.</p>
+            </div>
+            <div class="g2" style="align-items:start">
+              <div style="border:1px solid #E1E5EC;border-radius:14px;padding:4px 22px">
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #E1E5EC">
+                  <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#3F4A5C">Date of birth</div><div style="font-size:17px;font-weight:600">{{ dobShow }}</div></div>
+                  <button type="button" class="link" style="font-size:15px" onClick="{{ changeDob }}">Change</button>
+                </div>
+                <sc-if value="{{ editDob }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:12px 0;border-bottom:1px solid #E1E5EC">
+                    <label class="lbl" for="d-dob">Date of birth</label>
+                    <input id="d-dob" class="inp" type="text" inputmode="numeric" autocomplete="bday" placeholder="MM/DD/YYYY" value="{{ dob }}" onChange="{{ onDob }}">
+                  </div>
+                </sc-if>
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 0">
+                  <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#3F4A5C">Home address</div><div style="font-size:17px;font-weight:600;line-height:1.4">{{ addrLine1 }}<br>{{ addrLine2 }}</div></div>
+                  <button type="button" class="link" style="font-size:15px" onClick="{{ changeAddr }}">Change</button>
+                </div>
+                <sc-if value="{{ editAddr }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:0 0 18px;position:relative">
+                    <label class="lbl" for="d-addr">New address</label>
+                    <input id="d-addr" class="inp" type="text" autocomplete="street-address" placeholder="Start typing your street address" value="{{ addrQuery }}" onChange="{{ onAddrQuery }}">
+                    <sc-if value="{{ showSug }}" hint-placeholder-val="{{ false }}">
+                      <div style="margin-top:8px;border:1.5px solid #7C8799;border-radius:12px;overflow:hidden;background:#fff">
+                        <sc-for list="{{ sugs }}" as="a" hint-placeholder-count="3">
+                          <button type="button" class="sug" onClick="{{ a.pick }}">{{ a.text }}</button>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                    <div style="margin-top:12px"><label class="lbl" for="d-unit">Apt or unit (optional)</label>
+                    <input id="d-unit" class="inp" type="text" autocomplete="address-line2" value="{{ unit }}" onChange="{{ onUnit }}"></div>
+                  </div>
+                </sc-if>
+              </div>
+              <div>
+                <div class="lbl">Citizenship</div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ citOpts }}" as="o" hint-placeholder-count="3">
+                    <button type="button" class="opt {{ o.cls }}" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}" style="flex:none">
+                      <span style="flex:1">{{ o.label }}</span>
+                      <sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ citOther }}" hint-placeholder-val="{{ false }}">
+                  <p class="hint">Thanks for telling us. We'll walk you through any extra steps after your rate check.</p>
+                </sc-if>
+              </div>
+            </div>
+            <p class="hint" style="margin:0">Prototype: sample details filled from your phone number. Which fields can be prefilled depends on the identity vendor.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.income }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <h1 class="h1">Let's build your profile.</h1>
+              <p class="sub">Tell us a bit about your income so we can find the loan that fits you best.</p>
+            </div>
+            <div>
+              <h2 class="sech">Do you have monthly income?</h2>
+              <p class="hint" style="margin-top:4px">It's okay if the answer is no.</p>
+            </div>
+            <div class="row2" style="max-width:820px">
+              <sc-for list="{{ incOpts }}" as="o" hint-placeholder-count="2">
+                <button type="button" class="opt {{ o.cls }}" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}" style="min-height:76px">
+                  <span style="flex:1"><span style="display:block">{{ o.label }}</span><span style="display:block;font-size:14px;font-weight:500;color:#3F4A5C">{{ o.sub }}</span></span>
+                  <sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if>
+                </button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ incYes }}" hint-placeholder-val="{{ false }}">
+              <div style="max-width:360px">
+                <label class="lbl" for="d-inc">What is your monthly income before taxes?</label>
+                <div style="position:relative">
+                  <span style="position:absolute;left:16px;top:0;height:52px;display:flex;align-items:center;font-size:17px;color:#3F4A5C" aria-hidden="true">$</span>
+                  <input id="d-inc" class="inp" type="text" inputmode="numeric" value="{{ income }}" onChange="{{ onIncome }}" style="padding-left:32px">
+                </div>
+                <p class="hint">A rough number is fine. <button type="button" class="link" style="font-size:14px" onClick="{{ openIncome }}">What counts?</button></p>
+              </div>
+            </sc-if>
+        <sc-if value="{{ showCoAsk }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:14px;max-width:820px">
+                <div>
+                  <h2 class="sech">{{ coAskTitle }}</h2>
+                  <p class="hint" style="margin-top:2px">{{ coAskSub }}</p>
+                </div>
+                <div class="row2">
+                  <sc-for list="{{ coOpts }}" as="o" hint-placeholder-count="2">
+                    <button type="button" class="opt {{ o.cls }}" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}">
+                      <span style="flex:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap">{{ o.label }}<sc-if value="{{ o.rec }}" hint-placeholder-val="{{ false }}"><span class="recpill">Recommended</span></sc-if></span>
+                      <sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ showSuggest }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#F5F6F9;border-radius:14px;padding:18px 20px;font-size:15.5px;line-height:1.55;display:flex;flex-direction:column;gap:8px">
+                    <div><strong>A quick thought, and then it's your call.</strong> {{ suggestText }}</div>
+                    <button type="button" class="link" style="font-size:15px;align-self:flex-start" onClick="{{ openCosign }}">What does cosigning mean?</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ coAdd }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:16px">
+                    <div class="g2">
+                      <div>
+                        <label class="lbl" for="d-coname">Their first name</label>
+                        <input id="d-coname" class="inp" type="text" autocomplete="off" value="{{ coName }}" onChange="{{ onCoName }}">
+                      </div>
+                      <div>
+                        <label class="lbl" for="d-cophone">Their mobile number</label>
+                        <input id="d-cophone" class="inp" type="tel" inputmode="tel" autocomplete="off" placeholder="(555) 555-0142" value="{{ coPhone }}" onChange="{{ onCoPhone }}">
+                      </div>
+                    </div>
+                    <label class="chk">
+                      <input type="checkbox" checked="{{ coLater }}" onChange="{{ toggleCoLater }}">
+                      <span>They're not ready yet. Just give me the steps to share with them later.</span>
+                    </label>
+                    <sc-if value="{{ coText }}" hint-placeholder-val="{{ true }}">
+                      <div style="background:#F5F6F9;border-radius:14px;padding:16px 18px;font-size:15.5px;line-height:1.5;max-width:640px">
+                        <div class="cap" style="margin-bottom:4px">Your text will say</div>
+                        Hi {{ coNameShow }}, {{ first }} asked if you'd be willing to help with a student loan from LoanAmerica. There's no pressure. Open the link to see what it involves. You can say no.
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{ is.amount }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:600px">
+            <div>
+              <h1 class="h1">How much do you need?</h1>
+              <p class="sub">Pick your program and we'll work out the cost for you.</p>
+            </div>
+            <div>
+              <label class="lbl" for="d-prog">Your program</label>
+              <select id="d-prog" class="inp" value="{{ programId }}" onChange="{{ onProgram }}" style="cursor:pointer">
+                <option value="">Choose your program</option>
+                <option value="p1">Medical Assistant Certificate ($18,400 a year)</option><option value="p2">Welding Technology Diploma ($21,600 a year)</option><option value="p3">Dental Hygiene Associate Degree ($26,800 a year)</option>
+              </select>
+            </div>
+            <sc-if value="{{ programChosen }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:inherit">
+            <div class="seg" role="group" aria-label="What the loan covers">
+              <sc-for list="{{ periodOpts }}" as="o" hint-placeholder-count="2">
+                <button type="button" class="segbtn {{ o.cls }}" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}"><span class="segl">{{ o.label }}</span><span class="segs">{{ o.sub }}</span></button>
+              </sc-for>
+            </div>
+            <div class="card" style="display:flex;flex-direction:column;gap:14px">
+              <div class="kv" style="align-items:center;font-size:15px;min-height:40px"><span style="font-weight:600;color:#1A2433">Estimated cost of tuition</span><strong>{{ estText }}</strong></div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <label for="d-aid" style="flex:1;font-size:15px;font-weight:600">Estimated financial aid <span style="font-weight:500;color:#3F4A5C">(optional)</span></label>
+                <button type="button" class="iconbtn" aria-label="About estimated financial aid" onClick="{{ openAidInfo }}" style="width:40px;height:40px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg></button>
+                <div style="position:relative;width:120px">
+                  <span style="position:absolute;left:12px;top:0;height:44px;display:flex;align-items:center;font-size:16px;color:#3F4A5C" aria-hidden="true">$</span>
+                  <input id="d-aid" class="inp" type="text" inputmode="numeric" placeholder="0" value="{{ aid }}" onChange="{{ onAid }}" style="height:44px;font-size:16px;padding:0 12px 0 28px;text-align:right">
+                </div>
+              </div>
+              <div style="height:1px;background:#E1E5EC"></div>
+              <input type="range" min="{{ minNum }}" max="{{ needNum }}" step="100" value="{{ amount }}" onChange="{{ onAmount }}" aria-label="Loan amount">
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:#3F4A5C"><span>{{ minText }}</span><span>Up to {{ needText }}</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                <button type="button" class="step" aria-label="Borrow $500 less" onClick="{{ amtDown }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+                <div style="position:relative;width:250px;max-width:100%">
+                  <input id="d-amt" class="amtinp" type="text" inputmode="numeric" aria-label="Loan amount in dollars" value="{{ amountInput }}" onChange="{{ onAmountText }}" onBlur="{{ commitAmount }}" onKeyDown="{{ amountKey }}" style="font-size:46px">
+                </div>
+                <button type="button" class="step" aria-label="Borrow $500 more" onClick="{{ amtUp }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+              </div>
+            </div>
+            <p class="hint" style="margin:0">Your school confirms the final amount before any money is sent. <button type="button" class="link" style="font-size:14px" onClick="{{ openAmount }}">How we figure this out</button></p>
+            </div>
+            </sc-if>
+          </div>
+    </sc-if>
+
+    <sc-if value="{{ is.review }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <h1 class="h1">Check your answers.</h1>
+              <p class="sub">Looking good! Choose Edit to fix anything. We'll bring you right back here.</p>
+            </div>
+            <div style="border:1px solid #E1E5EC;border-radius:14px;padding:4px 24px">
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                <div class="rrow" style="display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #E1E5EC">
+                  <div class="rlbl" style="width:220px;font-size:14px;font-weight:700;color:#3F4A5C;flex:none">{{ r.label }}</div>
+                  <div style="flex:1;font-size:17px;font-weight:600;line-height:1.4;white-space:pre-line">{{ r.value }}</div>
+                  <button type="button" class="link" style="font-size:15px" aria-label="Edit {{ r.label }}" onClick="{{ r.edit }}">Edit</button>
+                </div>
+              </sc-for>
+            </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+            <label class="chk">
+              <input type="checkbox" checked="{{ creditOk }}" onChange="{{ toggleCredit }}">
+              <span>I authorize LoanAmerica to check my credit with a soft inquiry and to verify what I've told you. If we can't confirm something, we may ask for more information or documents. <button type="button" class="link" style="font-size:15.5px" onClick="{{ toggleExpA }}">{{ expALabel }}</button></span>
+            </label>
+            <sc-if value="{{ expA }}" hint-placeholder-val="{{ false }}">
+              <div tabindex="0" role="region" aria-label="Full credit consent" style="max-height:300px;overflow:auto;border:1.5px solid #C3CAD6;border-radius:12px;padding:16px 18px;background:#fff">
+                <sc-for list="{{ consentAParas }}" as="p" hint-placeholder-count="3">
+                  <div style="margin:0 0 14px">
+                    <div style="font-weight:700;font-size:15px;margin-bottom:2px">{{ p.h }}</div>
+                    <div style="font-size:14.5px;line-height:1.55;color:#3F4A5C;white-space:pre-line">{{ p.b }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+        <sc-if value="{{ bankYes }}" hint-placeholder-val="{{ true }}">
+            <label class="chk">
+              <input type="checkbox" checked="{{ bankOk }}" onChange="{{ toggleBank }}">
+              <span>I authorize LoanAmerica, [BANK_DATA_PROVIDER], Equifax and Prism to use my bank information to confirm my income and work out a cash flow score. <button type="button" class="link" style="font-size:15.5px" onClick="{{ toggleExpB }}">{{ expBLabel }}</button></span>
+            </label>
+            <sc-if value="{{ expB }}" hint-placeholder-val="{{ false }}">
+              <div tabindex="0" role="region" aria-label="Full bank authorization" style="max-height:300px;overflow:auto;border:1.5px solid #C3CAD6;border-radius:12px;padding:16px 18px;background:#fff">
+                <sc-for list="{{ consentBParas }}" as="p" hint-placeholder-count="3">
+                  <div style="margin:0 0 14px">
+                    <div style="font-weight:700;font-size:15px;margin-bottom:2px">{{ p.h }}</div>
+                    <div style="font-size:14.5px;line-height:1.55;color:#3F4A5C;white-space:pre-line">{{ p.b }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+        </sc-if>
+        </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.credit }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <h1 class="h1">Your rate is a click away.</h1>
+              <div style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#EAF0FA;color:#0C3063;border-radius:999px;padding:8px 14px;font-size:14.5px;font-weight:700">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+                Soft check. Your credit score won't change.
+              </div>
+            </div>
+            <sc-if value="{{ ssnNeeded }}" hint-placeholder-val="{{ false }}">
+              <div style="max-width:460px">
+                <div style="background:#F5F6F9;border-radius:14px;padding:16px 18px;font-size:15.5px;line-height:1.5;margin-bottom:16px">We couldn't match your details on our own, so we need one more thing to confirm it's you.</div>
+                <label class="lbl" for="d-ssn">Social Security number</label>
+                <div style="position:relative">
+                  <input id="d-ssn" class="inp" type="{{ ssnType }}" inputmode="numeric" autocomplete="off" placeholder="000-00-0000" value="{{ ssn }}" onChange="{{ onSsn }}" style="padding-right:64px">
+                  <button type="button" class="iconbtn" aria-label="Show or hide number" onClick="{{ toggleSsn }}" style="position:absolute;right:4px;top:4px">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <p class="hint"><button type="button" class="link" style="font-size:14px" onClick="{{ openSsn }}">Why we ask for this</button></p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        
+
+        <sc-if value="{{ is.loading }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:28px;padding:48px 0" aria-live="polite">
+            <div style="width:64px;height:64px;border-radius:50%;border:5px solid #DCE1E9;border-top-color:#0C3063;animation:spin .9s linear infinite" aria-hidden="true"></div>
+            <h1 class="h1" style="text-align:center">Finding your rate.</h1>
+            <div style="display:flex;flex-direction:column;gap:16px;min-width:300px">
+              <sc-for list="{{ loadRows }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:14px;font-size:17px;font-weight:600;color:{{ r.color }}">
+                  <div style="width:26px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;background:{{ r.bg }};color:#fff">
+                    <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                    </sc-if>
+                  </div>
+                  {{ r.label }}
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:14px;color:#3F4A5C">Soft check only. Your score stays the same.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.offerA }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+        <div class="celebrate">
+          <div class="burst" aria-hidden="true"><i style="--dx:-199px;--up:-158px;--fall:352px;--r:-525deg;animation-delay:296ms;width:9px;height:6px;border-radius:2px;background:#2E8B57"></i><i style="--dx:-281px;--up:-206px;--fall:263px;--r:80deg;animation-delay:239ms;width:15px;height:14px;border-radius:2px;background:#0C3063"></i><i style="--dx:255px;--up:-135px;--fall:183px;--r:578deg;animation-delay:20ms;width:11px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:19px;--up:-127px;--fall:229px;--r:518deg;animation-delay:84ms;width:9px;height:14px;border-radius:2px;background:#F2B705"></i><i style="--dx:-274px;--up:-127px;--fall:325px;--r:507deg;animation-delay:97ms;width:13px;height:9px;border-radius:50%;background:#C31131"></i><i style="--dx:-197px;--up:-127px;--fall:214px;--r:-45deg;animation-delay:275ms;width:13px;height:9px;border-radius:2px;background:#2E8B57"></i><i style="--dx:-149px;--up:-183px;--fall:198px;--r:-21deg;animation-delay:154ms;width:15px;height:6px;border-radius:50%;background:#F2B705"></i><i style="--dx:294px;--up:-218px;--fall:239px;--r:-161deg;animation-delay:341ms;width:13px;height:9px;border-radius:50%;background:#2E8B57"></i><i style="--dx:223px;--up:-184px;--fall:316px;--r:-563deg;animation-delay:199ms;width:15px;height:14px;border-radius:50%;background:#C31131"></i><i style="--dx:44px;--up:-225px;--fall:209px;--r:540deg;animation-delay:55ms;width:11px;height:9px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:-309px;--up:-180px;--fall:345px;--r:49deg;animation-delay:5ms;width:9px;height:9px;border-radius:50%;background:#F2B705"></i><i style="--dx:203px;--up:-92px;--fall:310px;--r:131deg;animation-delay:266ms;width:9px;height:14px;border-radius:2px;background:#E86A92"></i><i style="--dx:-282px;--up:-90px;--fall:332px;--r:648deg;animation-delay:23ms;width:15px;height:6px;border-radius:2px;background:#0C3063"></i><i style="--dx:147px;--up:-92px;--fall:336px;--r:501deg;animation-delay:29ms;width:15px;height:9px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:48px;--up:-151px;--fall:273px;--r:366deg;animation-delay:146ms;width:15px;height:14px;border-radius:50%;background:#F2B705"></i><i style="--dx:319px;--up:-155px;--fall:186px;--r:-692deg;animation-delay:125ms;width:9px;height:14px;border-radius:50%;background:#F28C28"></i><i style="--dx:340px;--up:-131px;--fall:193px;--r:-75deg;animation-delay:203ms;width:9px;height:14px;border-radius:2px;background:#F2B705"></i><i style="--dx:-285px;--up:-173px;--fall:289px;--r:258deg;animation-delay:128ms;width:11px;height:6px;border-radius:2px;background:#F28C28"></i><i style="--dx:119px;--up:-194px;--fall:242px;--r:516deg;animation-delay:58ms;width:9px;height:14px;border-radius:2px;background:#C31131"></i><i style="--dx:-152px;--up:-217px;--fall:271px;--r:361deg;animation-delay:79ms;width:9px;height:9px;border-radius:2px;background:#E86A92"></i><i style="--dx:66px;--up:-114px;--fall:333px;--r:-184deg;animation-delay:327ms;width:15px;height:9px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:-220px;--up:-156px;--fall:367px;--r:-457deg;animation-delay:122ms;width:15px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:159px;--up:-139px;--fall:250px;--r:-164deg;animation-delay:312ms;width:11px;height:14px;border-radius:50%;background:#0C3063"></i><i style="--dx:-166px;--up:-167px;--fall:308px;--r:617deg;animation-delay:100ms;width:9px;height:14px;border-radius:50%;background:#F2B705"></i><i style="--dx:-95px;--up:-122px;--fall:186px;--r:556deg;animation-delay:19ms;width:9px;height:6px;border-radius:2px;background:#C31131"></i><i style="--dx:-272px;--up:-189px;--fall:320px;--r:-240deg;animation-delay:323ms;width:13px;height:9px;border-radius:2px;background:#0C3063"></i><i style="--dx:-14px;--up:-143px;--fall:306px;--r:-447deg;animation-delay:38ms;width:9px;height:9px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:-142px;--up:-117px;--fall:288px;--r:-192deg;animation-delay:199ms;width:11px;height:9px;border-radius:50%;background:#F28C28"></i><i style="--dx:250px;--up:-147px;--fall:254px;--r:403deg;animation-delay:94ms;width:15px;height:14px;border-radius:2px;background:#C31131"></i><i style="--dx:113px;--up:-148px;--fall:200px;--r:393deg;animation-delay:42ms;width:15px;height:14px;border-radius:2px;background:#F28C28"></i><i style="--dx:341px;--up:-112px;--fall:256px;--r:-701deg;animation-delay:38ms;width:13px;height:6px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:-277px;--up:-153px;--fall:306px;--r:701deg;animation-delay:167ms;width:13px;height:6px;border-radius:50%;background:#E86A92"></i><i style="--dx:-26px;--up:-137px;--fall:210px;--r:-60deg;animation-delay:225ms;width:13px;height:9px;border-radius:2px;background:#F2B705"></i><i style="--dx:109px;--up:-149px;--fall:236px;--r:98deg;animation-delay:264ms;width:11px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:-336px;--up:-137px;--fall:353px;--r:90deg;animation-delay:299ms;width:15px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:39px;--up:-92px;--fall:219px;--r:490deg;animation-delay:288ms;width:11px;height:6px;border-radius:50%;background:#2E8B57"></i><i style="--dx:-72px;--up:-225px;--fall:236px;--r:336deg;animation-delay:29ms;width:11px;height:14px;border-radius:50%;background:#C31131"></i><i style="--dx:306px;--up:-122px;--fall:196px;--r:471deg;animation-delay:279ms;width:13px;height:14px;border-radius:50%;background:#C31131"></i><i style="--dx:-80px;--up:-204px;--fall:260px;--r:-547deg;animation-delay:13ms;width:11px;height:6px;border-radius:2px;background:#E86A92"></i><i style="--dx:72px;--up:-168px;--fall:362px;--r:-269deg;animation-delay:250ms;width:13px;height:9px;border-radius:2px;background:#F2B705"></i><i style="--dx:-20px;--up:-196px;--fall:306px;--r:279deg;animation-delay:275ms;width:9px;height:14px;border-radius:2px;background:#C31131"></i><i style="--dx:60px;--up:-141px;--fall:180px;--r:54deg;animation-delay:45ms;width:15px;height:14px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:10px;--up:-228px;--fall:208px;--r:143deg;animation-delay:215ms;width:11px;height:6px;border-radius:2px;background:#E86A92"></i><i style="--dx:24px;--up:-188px;--fall:262px;--r:-302deg;animation-delay:199ms;width:15px;height:14px;border-radius:50%;background:#C31131"></i><i style="--dx:122px;--up:-152px;--fall:367px;--r:-485deg;animation-delay:155ms;width:11px;height:6px;border-radius:2px;background:#F28C28"></i><i style="--dx:109px;--up:-226px;--fall:329px;--r:265deg;animation-delay:18ms;width:13px;height:6px;border-radius:50%;background:#F2B705"></i><i style="--dx:-138px;--up:-170px;--fall:333px;--r:246deg;animation-delay:304ms;width:11px;height:9px;border-radius:50%;background:#F2B705"></i><i style="--dx:52px;--up:-186px;--fall:373px;--r:-82deg;animation-delay:320ms;width:15px;height:9px;border-radius:2px;background:#2E8B57"></i><i style="--dx:-10px;--up:-90px;--fall:377px;--r:-531deg;animation-delay:247ms;width:11px;height:9px;border-radius:50%;background:#0C3063"></i><i style="--dx:34px;--up:-95px;--fall:312px;--r:-158deg;animation-delay:29ms;width:11px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:100px;--up:-167px;--fall:362px;--r:143deg;animation-delay:310ms;width:11px;height:9px;border-radius:50%;background:#F2B705"></i><i style="--dx:-212px;--up:-164px;--fall:312px;--r:-452deg;animation-delay:326ms;width:13px;height:14px;border-radius:2px;background:#0C3063"></i><i style="--dx:225px;--up:-185px;--fall:180px;--r:-302deg;animation-delay:76ms;width:11px;height:6px;border-radius:2px;background:#3D7DD8"></i><i style="--dx:180px;--up:-206px;--fall:302px;--r:700deg;animation-delay:239ms;width:9px;height:14px;border-radius:2px;background:#F28C28"></i><i style="--dx:158px;--up:-153px;--fall:184px;--r:-336deg;animation-delay:213ms;width:11px;height:14px;border-radius:50%;background:#F28C28"></i><i style="--dx:90px;--up:-177px;--fall:189px;--r:392deg;animation-delay:211ms;width:15px;height:6px;border-radius:2px;background:#F2B705"></i><i style="--dx:-37px;--up:-151px;--fall:283px;--r:-565deg;animation-delay:284ms;width:13px;height:9px;border-radius:2px;background:#C31131"></i><i style="--dx:8px;--up:-211px;--fall:355px;--r:-433deg;animation-delay:54ms;width:15px;height:14px;border-radius:2px;background:#F28C28"></i><i style="--dx:-236px;--up:-117px;--fall:183px;--r:52deg;animation-delay:243ms;width:11px;height:9px;border-radius:2px;background:#2E8B57"></i><i style="--dx:-350px;--up:-178px;--fall:337px;--r:-409deg;animation-delay:148ms;width:15px;height:14px;border-radius:2px;background:#F2B705"></i><i style="--dx:41px;--up:-208px;--fall:245px;--r:-334deg;animation-delay:102ms;width:15px;height:14px;border-radius:50%;background:#F2B705"></i><i style="--dx:-80px;--up:-110px;--fall:365px;--r:591deg;animation-delay:169ms;width:15px;height:9px;border-radius:50%;background:#0C3063"></i><i style="--dx:276px;--up:-206px;--fall:213px;--r:667deg;animation-delay:322ms;width:11px;height:6px;border-radius:50%;background:#C31131"></i><i style="--dx:114px;--up:-207px;--fall:205px;--r:-256deg;animation-delay:16ms;width:11px;height:6px;border-radius:2px;background:#F28C28"></i></div>
+          <div class="cele-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6z"/><path d="M19 14l.9 2.6L22 17.5l-2.1.9L19 21l-.9-2.6L16 17.5l2.1-.9z"/></svg> Great news!</div>
+          <h1 class="h1" style="margin-top:12px">Congratulations, {{ first }}!</h1>
+          <p class="sub">You have 3 loan offers for {{ offerAmountText }} at {{ school }}. Pick the one that fits your budget.</p>
+        </div>
+        <sc-if value="{{ partial }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#E8F1FA;border-radius:16px;padding:16px 18px;display:flex;gap:12px;color:#0C3063">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg>
+            <div style="display:flex;flex-direction:column;gap:6px;color:#1A2433">
+              <div style="font-size:16px;font-weight:700">We can lend you {{ offerAmountText }} of the {{ requestedText }} you asked for.</div>
+              <div style="font-size:15.5px;line-height:1.5">Your offers below are for {{ offerAmountText }}. To cover the other {{ shortText }}, you can add a cosigner, who may help you qualify for more, or ask your school's financial aid office about other aid. <button type="button" class="link" style="font-size:15.5px" onClick="{{ openCosign }}">What does a cosigner do?</button></div>
+            </div>
+          </div>
+        </sc-if>
+        <div class="offers" role="radiogroup" aria-label="Choose your offer">
+          <sc-for list="{{ offerRows }}" as="o" hint-placeholder-count="3">
+            <button type="button" role="radio" aria-checked="{{ o.on }}" class="offer {{ o.cls }}" onClick="{{ o.pick }}">
+              <span style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="cap">{{ o.tag }}</span><sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><span style="width:22px;height:22px;border-radius:11px;border:2px solid #0C3063;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:12px;height:12px;border-radius:6px;background:#0C3063"></span></span></sc-if><sc-if value="{{ o.off }}" hint-placeholder-val="{{ true }}"><span style="width:22px;height:22px;border-radius:11px;border:2px solid #7C8799;flex:none"></span></sc-if></span>
+              <span style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="offer-rate">{{ o.payText }}<span style="font-family:inherit;font-size:16px;font-weight:600;color:#3F4A5C">/mo</span></span><span class="offer-pay">{{ o.rateText }} interest rate</span></span>
+              <span class="offer-meta"><span style="white-space:nowrap">{{ o.termText }}</span> · <span style="white-space:nowrap">{{ o.totalText }} total</span> · <span style="white-space:nowrap">{{ o.aprText }} APR (includes fees)</span></span>
+            </button>
+          </sc-for>
+        </div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+          <p class="hint" style="margin:0;line-height:1.55"><strong style="color:#1A2433">You have until [ACCEPTANCE_DEADLINE] to accept.</strong> The rate and terms won't change during that time, except as the law allows. After you accept, you'll get a Final Disclosure and then a right to cancel. No money is sent before that window closes. <button type="button" class="link" style="font-size:14px" onClick="{{ openH19 }}">Read my full Approval Disclosure</button></p>
+                <label class="chk">
+                  <input type="checkbox" checked="{{ hardOk }}" onChange="{{ toggleHard }}">
+                  <span>I authorize LoanAmerica to make a hard inquiry with Equifax. I understand it may lower my credit score. <button type="button" class="link" style="font-size:15.5px" onClick="{{ openHard }}">Read the full authorization</button></span>
+                </label>
+          <label class="chk">
+            <input type="checkbox" checked="{{ termsOk }}" onChange="{{ toggleTerms }}">
+            <span>I've read my Approval Disclosure and I want to accept these terms.</span>
+          </label>
+        </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.offerB }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <div style="font-size:16px;font-weight:700;color:#3F4A5C">Almost there, {{ first }}.</div>
+              <h1 class="h1" style="margin-top:4px">{{ offerBTitle }}</h1>
+              <p class="sub">{{ offerBSub }}</p>
+            </div>
+            <div class="sum" style="background:#F5F6F9;border-radius:14px;padding:22px;max-width:640px">
+              <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">1</div><div>You send them a text. Nothing to download.</div></div>
+              <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">2</div><div>They answer a few questions on their own phone.</div></div>
+              <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">3</div><div>We text you the moment they finish. You can close this page while you wait.</div></div>
+            </div>
+            <div style="display:flex;gap:24px;font-size:15.5px">
+              <button type="button" class="link" style="font-size:15.5px" onClick="{{ openCosign }}">What does cosigning mean?</button>
+              <button type="button" class="link" style="font-size:15.5px" onClick="{{ openSave }}">I'll do this later</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.offerC }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <div>
+              <div style="font-size:16px;font-weight:700;color:#3F4A5C">Thanks, {{ first }}.</div>
+              <h1 class="h1" style="margin-top:4px">We need a little more.</h1>
+              <p class="sub">{{ offerCSub }}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;max-width:700px">
+              <sc-for list="{{ docRows }}" as="d" hint-placeholder-count="3">
+                <button type="button" class="opt {{ d.cls }}" aria-pressed="{{ d.on }}" onClick="{{ d.toggle }}" style="min-height:76px;flex:none">
+                  <span style="flex:1"><span style="display:block">{{ d.label }}</span><span style="display:block;font-size:14px;font-weight:500;color:#3F4A5C">{{ d.sub }}</span></span>
+                  <span style="font-size:15px;font-weight:700;color:#0C3063">{{ d.action }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="font-size:15px;line-height:1.5;color:#3F4A5C;max-width:700px">You can drag files here, choose them from your computer, or send them from your phone. We'll tell you if anything else is needed. <button type="button" class="link" style="font-size:15px" onClick="{{ openWhyDocs }}">Why am I seeing this?</button></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.invite }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <sc-if value="{{ notInvited }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <h1 class="h1">Who should we text?</h1>
+                <p class="sub">We'll send them a link. They'll know it's from you.</p>
+              </div>
+              <div class="g2">
+                <div>
+                  <label class="lbl" for="d-coname">Their first name</label>
+                  <input id="d-coname" class="inp" type="text" autocomplete="off" value="{{ coName }}" onChange="{{ onCoName }}">
+                </div>
+                <div>
+                  <label class="lbl" for="d-cophone">Their mobile number</label>
+                  <input id="d-cophone" class="inp" type="tel" inputmode="tel" autocomplete="off" placeholder="(555) 555-0142" value="{{ coPhone }}" onChange="{{ onCoPhone }}">
+                </div>
+              </div>
+              <div style="background:#F5F6F9;border-radius:14px;padding:16px 18px;font-size:15.5px;line-height:1.5;max-width:640px">
+                <div class="cap" style="margin-bottom:4px">Your text will say</div>
+                Hi {{ coNameShow }}, {{ first }} asked you to cosign a student loan with LoanAmerica. It takes a few minutes on your phone.
+              </div>
+            </sc-if>
+            <sc-if value="{{ invited }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:12px 0">
+                <div style="width:64px;height:64px;border-radius:32px;background:#0C3063;color:#fff;display:flex;align-items:center;justify-content:center">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                </div>
+                <h1 class="h1">Sent to {{ coNameShow }}.</h1>
+                <p class="sub" style="margin:0">We'll text you the moment they finish. You don't need to stay on this page.</p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ is.sign }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:600px">
+        <div>
+          <h1 class="h1">Sign your school form.</h1>
+          <p class="sub">Almost there! Your school needs this before your loan can go through. We've filled it in for you.</p>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:14px;font-size:16.5px">
+          <div class="cap">{{ school }} · {{ periodLabel }}</div>
+          <div class="kv"><span>A. Cost of attendance</span><strong>{{ estText }}</strong></div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <label for="d-aid2" style="flex:1;line-height:1.35">B. Other aid you expect<span style="display:block;font-size:13px;color:#3F4A5C">Grants, scholarships, federal loans</span></label>
+            <div style="position:relative;width:130px;flex:none">
+              <span style="position:absolute;left:12px;top:0;height:44px;display:flex;align-items:center;font-size:16px;color:#3F4A5C" aria-hidden="true">$</span>
+              <input id="d-aid2" class="inp" type="text" inputmode="numeric" placeholder="0" value="{{ aid }}" onChange="{{ onAid }}" style="height:44px;font-size:16px;padding:0 12px 0 28px;text-align:right">
+            </div>
+          </div>
+          <div style="height:1px;background:#E1E5EC"></div>
+          <div class="kv" style="font-weight:700"><span>C. Difference (A minus B)</span><strong>{{ diffText }}</strong></div>
+        </div>
+        <sc-if value="{{ over }}" hint-placeholder-val="{{ false }}">
+          <div class="card" style="border:2px solid #0C3063;display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:15px;line-height:1.5"><strong>You asked for {{ amountText }}, which is more than line C ({{ diffText }}).</strong> Borrowing more than line C may reduce your eligibility for free or lower-cost aid.</div>
+            <label class="chk">
+              <input type="checkbox" checked="{{ overAck }}" onChange="{{ toggleOver }}">
+              <span>I understand, and I still want to ask for {{ amountText }}.</span>
+            </label>
+          </div>
+        </sc-if>
+        <p class="hint" style="margin:0;line-height:1.55">Please check lines A and B with your school's financial aid office. Free or lower-cost federal, state or school aid may be available in place of, or on top of, a private loan. <strong style="color:#1A2433">Warning:</strong> if you borrow more than line C, you risk reducing your eligibility for free or lower-cost aid. <button type="button" class="link" style="font-size:14px" onClick="{{ openSelfCert }}">Read the full form</button></p>
+        <div>
+          <label class="lbl" for="d-sign">Type your full name to sign</label>
+          <input id="d-sign" class="inp" type="text" autocomplete="name" value="{{ signName }}" onChange="{{ onSign }}">
+          <p class="hint">I certify that I have read and understood the notices above and, to the best of my knowledge, the information on this form is true and correct. Your typed name works as your signature. Date: {{ today }}</p>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ is.mpn }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:600px">
+        <div>
+          <h1 class="h1">Sign your loan agreement.</h1>
+          <p class="sub">Last step! This is the contract for your loan. Take your time.</p>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;font-size:16.5px">
+          <div class="kv"><span>Loan amount</span><strong>{{ offerAmountText }}</strong></div>
+          <div class="kv"><span>Fixed rate</span><strong>{{ rate }}</strong></div>
+          <div class="kv"><span>Paying early</span><strong>No penalty</strong></div>
+        </div>
+        <p class="hint" style="margin:0;line-height:1.55"><strong style="color:#1A2433">You have a right to cancel.</strong> After you sign, you'll get a Final Disclosure and can cancel without penalty for 3 business days. <button type="button" class="link" style="font-size:14px" onClick="{{ openH20 }}">How it works</button><br><strong style="color:#1A2433">Reporting.</strong> We may report your payments, on time or late, to credit bureaus, including Equifax. <strong style="color:#1A2433">Disputes.</strong> See section 23 of the agreement.</p>
+        <label class="chk">
+          <input type="checkbox" checked="{{ mpnOk }}" onChange="{{ toggleMpn }}">
+          <span>I've read the <button type="button" class="link" style="font-size:15.5px" onClick="{{ openMpn }}">Master Promissory Note and Credit Agreement</button> and I agree to it. I've been given the <button type="button" class="link" style="font-size:15.5px" onClick="{{ openPrivacy }}">Privacy Notice</button>.</span>
+        </label>
+        <div>
+          <label class="lbl" for="d-mpnsign">Type your full name to sign</label>
+          <input id="d-mpnsign" class="inp" type="text" autocomplete="name" value="{{ mpnSign }}" onChange="{{ onMpnSign }}">
+          <p class="hint">Your typed name works as your signature. Date: {{ today }}</p>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ is.tracker }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:600px">
+        <div>
+          <sc-if value="{{ trackCelebrate }}" hint-placeholder-val="{{ false }}"><div class="celebrate"><svg class="confetti" viewBox="0 0 140 80" aria-hidden="true"><circle cx="18" cy="22" r="4" fill="#C31131"/><rect x="40" y="8" width="8" height="8" rx="2" fill="#0C3063" transform="rotate(20 44 12)"/><circle cx="70" cy="30" r="3" fill="#F2B705"/><rect x="92" y="14" width="10" height="5" rx="2" fill="#2E8B57" transform="rotate(-25 97 16)"/><circle cx="120" cy="40" r="4" fill="#0C3063"/><rect x="58" y="52" width="9" height="5" rx="2" fill="#C31131" transform="rotate(35 62 54)"/><circle cx="104" cy="64" r="3" fill="#F2B705"/><circle cx="30" cy="58" r="2.5" fill="#2E8B57"/></svg><div class="cele-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> You did it!</div></div></sc-if>
+          <h1 class="h1" style="margin-top:8px">{{ trackTitle }}</h1>
+          <p class="sub">{{ trackSub }}</p>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:16px">
+          <div class="cap">Application LA-SAMPLE-0001</div>
+          <sc-for list="{{ trackRows }}" as="r" hint-placeholder-count="6">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <div style="width:28px;height:28px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ r.bg }};border:2px solid {{ r.ring }};color:#fff">
+                <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                </sc-if>
+                <sc-if value="{{ r.now }}" hint-placeholder-val="{{ false }}">
+                  <div style="width:10px;height:10px;border-radius:5px;background:#0C3063"></div>
+                </sc-if>
+              </div>
+              <div>
+                <div style="font-size:16px;font-weight:700;color:{{ r.tcolor }}">{{ r.title }}</div>
+                <div style="font-size:14.5px;line-height:1.45;color:#3F4A5C">{{ r.sub }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <p class="hint" style="margin:0;line-height:1.55"><strong style="color:#1A2433">Documents: {{ docsTitle }}</strong> {{ docsSub }} <button type="button" class="link" style="font-size:14px" onClick="{{ openH20 }}">How the 3-day cancel window works</button></p>
+        <label class="chk">
+          <input type="checkbox" checked="{{ c2 }}" onChange="{{ toggleC2 }}">
+          <span>Optional: send me offers and news from LoanAmerica. This has no effect on my loan. <button type="button" class="link" style="font-size:15.5px" onClick="{{ openC2 }}">Read the full text</button></span>
+        </label>
+        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+          <button type="button" class="link" style="font-size:14px;color:#3F4A5C;min-height:44px" onClick="{{ restart }}">Prototype: start over</button>
+        </div>
+      </div>
+    </sc-if>
+
+
+        <sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:4px">
+            <button type="submit" class="btn" disabled="{{ ctaDisabled }}">{{ ctaLabel }}</button>
+            <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="link" style="font-size:15.5px" onClick="{{ back }}">Back</button>
+            </sc-if>
+            <sc-if value="{{ showDemo }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="link" style="font-size:13.5px;font-weight:600;color:#3F4A5C;margin-left:auto" onClick="{{ demoFill }}">Prototype: fill this page for me</button>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </form>
+    </main>
+
+    <aside class="aside {{ asideCls }}" aria-label="Ask LoanAmerica">
+      <div style="padding:14px 14px 8px 18px;display:flex;justify-content:space-between;gap:8px;align-items:center">
+        <div style="display:flex;align-items:center;gap:12px">
+          <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true" style="flex:none"><circle cx="22" cy="22" r="22" fill="#0C3063"/><circle cx="16" cy="19" r="2.4" fill="#fff"/><circle cx="28" cy="19" r="2.4" fill="#fff"/><path d="M14.5 27c2 3.2 4.4 4.5 7.5 4.5s5.5-1.3 7.5-4.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <div>
+            <div class="h3">Guide</div>
+            <div style="font-size:12.5px;line-height:1.35;color:#3F4A5C;margin-top:2px">AI assistant. It explains and helps you ask good questions. It does not make credit decisions.</div>
+          </div>
+        </div>
+        <button type="button" class="iconbtn askclose" aria-label="Close assistant" onClick="{{ closeAside }}" style="{{ closeShow }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div style="display:flex;gap:8px;padding:4px 16px 10px;border-bottom:1px solid #E1E5EC" role="tablist">
+        <button type="button" role="tab" class="pill {{ tabChatCls }}" aria-selected="{{ tabChat }}" onClick="{{ goChat }}">Chat</button>
+        <button type="button" role="tab" class="pill {{ tabLearnCls }}" aria-selected="{{ tabLearn }}" onClick="{{ goLearn }}">Learn</button>
+      </div>
+      <sc-if value="{{ tabChat }}" hint-placeholder-val="{{ true }}">
+      <div id="d-chat" aria-live="polite" style="flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px;background:#F5F6F9">
+        <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="2">
+          <sc-if value="{{ m.isUser }}" hint-placeholder-val="{{ false }}">
+            <div style="align-self:flex-end;max-width:88%;background:#0C3063;color:#fff;border-radius:16px 16px 4px 16px;padding:10px 14px;font-size:15px;line-height:1.45">{{ m.text }}</div>
+          </sc-if>
+          <sc-if value="{{ m.isBot }}" hint-placeholder-val="{{ true }}">
+            <div style="align-self:flex-start;max-width:96%;background:#fff;border:1px solid #E1E5EC;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:15px;line-height:1.5;display:flex;flex-direction:column;gap:10px">
+              <div style="white-space:pre-line">{{ m.text }}</div>
+              <sc-if value="{{ m.hasHeads }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#F5F6F9;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.45"><strong style="color:#0C3063">Heads up. </strong>{{ m.heads }}</div>
+              </sc-if>
+              <sc-if value="{{ m.hasSrc }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+                  <div style="font-size:12px;font-weight:700;color:#3F4A5C">Where this comes from</div>
+                  <sc-for list="{{ m.srcs }}" as="x" hint-placeholder-count="1">
+                    <button type="button" class="srcbtn" onClick="{{ x.open }}">{{ x.label }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ m.hasChoices }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div class="cap">Worth asking next</div>
+                  <sc-for list="{{ m.choices }}" as="c" hint-placeholder-count="2">
+                    <button type="button" class="choice {{ c.cls }}" disabled="{{ c.faded }}" onClick="{{ c.ask }}">
+                      <span style="flex:1">{{ c.q }}</span>
+                      <sc-if value="{{ c.picked }}" hint-placeholder-val="{{ false }}">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ m.actionPending }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <button type="button" class="btn" style="min-width:0;padding:0 18px;height:44px;font-size:15px" onClick="{{ m.actionYesGo }}">{{ m.actionYes }}</button>
+                  <button type="button" class="btn2" style="height:44px;padding:0 18px" onClick="{{ m.actionNoGo }}">{{ m.actionNo }}</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ m.handoff }}" hint-placeholder-val="{{ false }}">
+                <button type="button" class="btn2" style="height:44px" onClick="{{ openHelp }}">Talk to a person</button>
+              </sc-if>
+              <sc-if value="{{ m.showFb }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:4px;font-size:13px;color:#3F4A5C">
+                  <sc-if value="{{ m.fbNone }}" hint-placeholder-val="{{ true }}">
+                    <span>Was this helpful?</span>
+                    <button type="button" class="iconbtn" aria-label="Helpful" onClick="{{ m.fbYes }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-7c1.5 0 2.5 1 2.2 2.6L12.8 9H19a2 2 0 011.9 2.6l-2 6.4A2 2 0 0117 19H7"/></svg>
+                    </button>
+                    <button type="button" class="iconbtn" aria-label="Not helpful" onClick="{{ m.fbNo }}">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate(180deg)"><path d="M7 11v9H4v-9h3zM7 11l4-7c1.5 0 2.5 1 2.2 2.6L12.8 9H19a2 2 0 011.9 2.6l-2 6.4A2 2 0 0117 19H7"/></svg>
+                    </button>
+                  </sc-if>
+                  <sc-if value="{{ m.fbUp }}" hint-placeholder-val="{{ false }}"><span>Thanks. That helps us improve.</span></sc-if>
+                  <sc-if value="{{ m.fbDown }}" hint-placeholder-val="{{ false }}"><span>Thanks for telling us. Want a person to help? <button type="button" class="link" style="font-size:13px" onClick="{{ openHelp }}">Talk to a person</button></span></sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
+          <div role="status" aria-label="Guide is typing" style="align-self:flex-start;background:#fff;border:1px solid #E1E5EC;border-radius:16px 16px 16px 4px;padding:14px 16px;display:flex;gap:5px">
+            <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s infinite"></span>
+            <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s .2s infinite"></span>
+            <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s .4s infinite"></span>
+          </div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ showChips }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:12px 16px 0;display:flex;flex-direction:column;gap:8px;border-top:1px solid #E1E5EC">
+          <div class="cap">{{ chipsLabel }}</div>
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+            <button type="button" class="chip" onClick="{{ c.ask }}">{{ c.q }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <form onSubmit="{{ send }}" style="display:flex;gap:8px;padding:12px 16px 8px">
+        <label for="d-ask-in" style="position:absolute;left:-9999px">Ask a question</label>
+        <button type="button" class="iconbtn" aria-label="Speak your question" aria-pressed="{{ listening }}" onClick="{{ mic }}" style="width:46px;height:46px;flex:none;border:1.5px solid #0C3063;background:{{ micBg }};color:{{ micColor }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>
+        </button>
+        <input id="d-ask-in" class="inp" type="text" autocomplete="off" placeholder="{{ inputPlaceholder }}" value="{{ draft }}" onChange="{{ onDraft }}" style="height:46px;font-size:15px">
+        <button type="submit" class="btn" style="min-width:70px;height:46px;font-size:15px;padding:0 14px">Send</button>
+      </form>
+      <div style="padding:0 16px 14px;font-size:12px;line-height:1.45;color:#3F4A5C">I can make mistakes, so check the documents I point to. Never type your SSN or bank login here. This chat is saved with your application. [Retention to be set.]</div>
+      </sc-if>
+      <sc-if value="{{ tabLearn }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow-y:auto;padding:14px 16px 20px;display:flex;flex-direction:column;gap:18px;background:#F5F6F9">
+          <div style="font-size:14.5px;line-height:1.5;color:#3F4A5C">Short answers to the questions people ask most. Choose one and Guide walks you through it.</div>
+          <sc-for list="{{ learnGroups }}" as="g" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div class="cap">{{ g.title }}</div>
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                <button type="button" class="choice live" onClick="{{ it.ask }}"><span style="flex:1">{{ it.q }}</span></button>
+              </sc-for>
+            </div>
+          </sc-for>
+          <div style="font-size:13px;line-height:1.45;color:#3F4A5C">More guides are coming to [LEARN_NAME].</div>
+        </div>
+      </sc-if>
+    </aside>
+
+  </div>
+
+  <button type="button" class="askfab {{ guideCls }}" onClick="{{ toggleAside }}">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg>
+    Ask
+  </button>
+
+  <sc-if value="{{ amtConfirm }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:20px">
+      <button type="button" aria-label="Close" onClick="{{ closeAmtConfirm }}" style="position:absolute;inset:0;border:0;background:rgba(10,20,40,.55);animation:fade .2s ease both"></button>
+      <div role="dialog" aria-modal="true" aria-label="Confirm Amount" style="position:relative;width:100%;max-width:620px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(10,20,40,.35);animation:pop .25s ease both">
+        <div style="background:#0C3063;color:#fff;padding:26px 52px;text-align:center;position:relative">
+          <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:24px;margin:0">Confirm Amount</h2>
+          <button type="button" aria-label="Close" onClick="{{ closeAmtConfirm }}" style="position:absolute;right:10px;top:10px;width:44px;height:44px;border:0;background:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        <div style="padding:24px 24px 26px;display:flex;flex-direction:column;gap:14px;text-align:center;color:#0C3063;font-size:16px;line-height:1.5">
+          <p style="margin:0">Please confirm the amount requested.</p>
+          <p style="margin:0">Amount Requested: <strong>{{ amountText }}</strong></p>
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+            <button type="button" class="btn2" style="flex:1;min-width:140px;max-width:220px" onClick="{{ closeAmtConfirm }}">Change Amount</button>
+            <button type="button" class="btn" style="flex:1;min-width:140px;max-width:220px" onClick="{{ confirmAmt }}">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:24px">
+      <button type="button" aria-label="Close" onClick="{{ closeSheet }}" style="position:absolute;inset:0;border:0;background:rgba(10,20,40,.55);animation:fade .2s ease both"></button>
+      <div role="dialog" aria-modal="true" aria-label="{{ sheet.title }}" style="position:relative;background:#fff;border-radius:20px;width:100%;max-width:760px;max-height:86vh;display:flex;flex-direction:column;animation:pop .22s ease both">
+        <div style="padding:24px 28px 8px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+          <h2 class="h3" style="font-size:26px">{{ sheet.title }}</h2>
+          <button type="button" class="iconbtn" aria-label="Close" onClick="{{ closeSheet }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <div style="padding:8px 28px;overflow:auto">
+          <sc-for list="{{ sheet.paras }}" as="p" hint-placeholder-count="2">
+            <div style="margin:0 0 16px">
+              <div style="font-weight:700;font-size:15.5px;margin-bottom:2px">{{ p.h }}</div>
+              <div style="font-size:15.5px;line-height:1.6;color:#3F4A5C;white-space:pre-line">{{ p.b }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:12px 28px 24px;display:flex;justify-content:flex-end"><button type="button" class="btn" onClick="{{ closeSheet }}">Got it</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.timers = [];
+    this.ai = window.LA_ASSIST ? window.LA_ASSIST.controller(this, { openKey: "asideOpen", chatId: "d-chat", screenKey: () => this.screenKey(), phone: () => this.state.phone }) : null;
+    this.state = this.freshState();
+  }
+  freshState() {
+    return {
+      step: "start", returnTo: null, outcome: "offer", amtConfirm: false, fullApproval: false, offerId: "b", programId: "", noBank: false, aidEdit: false, amtDraft: null, role: "student",
+      phone: "", email: "", code: "", agree: false, discOpen: false, emailCopy: false,
+      first: "", last: "", dob: "", cit: "", editDob: false, editAddr: false,
+      addrQuery: "", addr: null, unit: "",
+      incomeYes: null, income: "",
+      coChoice: null, coLater: false, coName: "", coPhone: "", invited: false,
+      amount: 99999, period: "year", aid: "",
+      ssn: "", ssnShow: false, ssnNeeded: false, creditOk: false, bankOk: false,
+      loadStage: 0,
+      docs: { id: false, pay: false, bank: false },
+      hardOk: false, termsOk: false,
+      overAck: false, signName: "",
+      mpnOk: false, mpnSign: "", c2: false,
+      sheet: null,
+      expA: false, expB: false,
+      msgs: this.ai ? this.ai.initial() : [], typing: false, draft: "", asideOpen: false, tab: "chat", listening: false
+    };
+  }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+
+  fmtPhone(v) {
+    const d = v.replace(/\D/g, "").slice(0, 10);
+    if (d.length < 4) return d;
+    if (d.length < 7) return "(" + d.slice(0, 3) + ") " + d.slice(3);
+    return "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+  }
+  fmtDob(v) {
+    const d = v.replace(/\D/g, "").slice(0, 8);
+    if (d.length < 3) return d;
+    if (d.length < 5) return d.slice(0, 2) + "/" + d.slice(2);
+    return d.slice(0, 2) + "/" + d.slice(2, 4) + "/" + d.slice(4);
+  }
+  fmtSsn(v) {
+    const d = v.replace(/\D/g, "").slice(0, 9);
+    if (d.length < 4) return d;
+    if (d.length < 6) return d.slice(0, 3) + "-" + d.slice(3);
+    return d.slice(0, 3) + "-" + d.slice(3, 5) + "-" + d.slice(5);
+  }
+  fmtMoney(v) {
+    const d = v.replace(/\D/g, "").slice(0, 7);
+    return d ? Number(d).toLocaleString("en-US") : "";
+  }
+  dobOk() {
+    const d = this.state.dob.replace(/\D/g, "");
+    if (d.length !== 8) return false;
+    const m = +d.slice(0, 2), dd = +d.slice(2, 4), y = +d.slice(4);
+    return m >= 1 && m <= 12 && dd >= 1 && dd <= 31 && y >= 1930 && y <= 2010;
+  }
+  qrPath() {
+    const n = 25; let d = ""; let seed = 11;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const fin = (x, y) => (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) { if (!fin(x, y) && rnd() > 0.55) d += "M" + x + " " + y + "h1v1h-1z"; }
+    [[0, 0], [n - 7, 0], [0, n - 7]].forEach((o) => {
+      const x = o[0], y = o[1];
+      d += "M" + x + " " + y + "h7v7h-7zM" + (x + 1) + " " + (y + 1) + "v5h5v-5zM" + (x + 2) + " " + (y + 2) + "h3v3h-3z";
+    });
+    return d;
+  }
+
+  go(step) {
+    this.setState({ step: step, sheet: null });
+    if ((step === "confirm" || step === "income") && !this.state.dob) this.setState({ cit: this.state.cit || "citizen", dob: "04/12/2004", addr: { street: "123 Sample Street", city: "Los Angeles", state: "CA", zip: "90001" } });
+    this.later(() => { try { window.scrollTo(0, 0); } catch (e) {} }, 0);
+    if (step === "loading") this.runLoading();
+  }
+  runLoading() {
+    this.setState({ loadStage: 0 });
+    this.later(() => this.setState({ loadStage: 1 }), 800);
+    this.later(() => this.setState({ loadStage: 2 }), 1700);
+    this.later(() => this.setState({ loadStage: 3 }), 2500);
+    this.later(() => { if (this.state.step === "loading") this.go("offer"); }, 3100);
+  }
+  next() {
+    const s = this.state, step = s.step;
+    // Confirm Amount dialog before leaving the amount page
+    if (step === "amount" && !this._amtOk) { this.setState({ amtConfirm: true }); return; }
+    this._amtOk = false;
+    // Ineligible citizenship status: stop before sending a code
+    if (step === "start" && (s.cit === "visa" || s.cit === "other")) { this.go("ineligible"); return; }
+    if (s.returnTo && ["start", "confirm", "income", "amount"].indexOf(step) > -1) {
+      const rt = s.returnTo;
+      this.setState({ returnTo: null });
+      this.go(rt);
+      return;
+    }
+    const offerNext = s.outcome === "offer" ? "sign" : (s.outcome === "needs" ? (s.invited ? "tracker" : "invite") : "tracker");
+    const map = {
+      start: "code", code: "income", income: "amount", amount: "review",
+      review: s.ssnNeeded ? "credit" : "loading", credit: "loading", offer: offerNext,
+      invite: "tracker", lockin: "approved", approved: "sign", sign: "mpn", mpn: "tracker"
+    };
+    if (map[step]) this.go(map[step]);
+  }
+  back() {
+    const s = this.state;
+    if (s.returnTo) { const rt = s.returnTo; this.setState({ returnTo: null }); this.go(rt); return; }
+    const prev = { ineligible: "start", code: "start", confirm: "review", income: "code", amount: "income", review: "amount", credit: "review", bank: s.ssnNeeded ? "credit" : "review", offer: "review", invite: "offer", lockin: "offer" };
+    if (prev[s.step]) this.go(prev[s.step]);
+  }
+  edit(step) { this.setState({ returnTo: "review" }); this.go(step); }
+
+  screenKey() {
+    const s = this.state, st = s.step;
+    if (st === "offer") return "offer" + (s.outcome === "offer" ? "A" : (s.outcome === "needs" ? "B" : "C"));
+    const m = { invite: "cosigner" };
+    return m[st] || st;
+  }
+  askNow(q, id) { if (this.ai) this.ai.ask(q, id); }
+
+  sheetData(key) {
+    const s = this.state;
+    const L = window.LA_LEGAL || {};
+    if (L[key]) return { title: L[key].title, paras: L[key].paras || [] };
+    const phone = s.phone || "your phone";
+    const D = {
+      tuition: { title: "What counts as tuition and fees", paras: [
+        { h: "What we lend for", b: "Tuition and fees for your program, as your school reports them. We don't lend for books, supplies or living costs." },
+        { h: "Where the number comes from", b: "Your school sent us this figure for the period you picked. Your school confirms the final amount before any money is sent." }
+      ] },
+      aidinfo: { title: "Other aid you expect", paras: [
+        { h: "What to include", b: "Grants, scholarships, federal aid and anything else that will pay toward this period's tuition and fees. A good guess is fine." },
+        { h: "Why we ask", b: "It lowers what you need to borrow, and it's part of the school form you'll sign later. Your school's financial aid office can tell you the exact amount." }
+      ] },
+      fullyear: { title: "Why most students pick the full year", paras: [
+        { h: "What's popular", b: "Most students choose the full academic year, so the rest of the year is covered once. [Confirm each reason below is true for our process before using it.]" },
+        { h: "What it can mean for you", b: "One application for the whole year instead of one per term. [Confirm: one credit inquiry for the year, one school certification.]" },
+        { h: "You're not locked in", b: "You can still choose one term if that's all you need. You can always borrow less." }
+      ] },
+      save: { title: "Saved", paras: [{ h: "Pick up anytime", b: "Your answers are saved. We texted a link to " + phone + " so you can come back on any device." }] },
+      help: { title: "Talk to a person", paras: [{ h: "Ways to reach us", b: "[Support channels and hours supplied by operations.]" }] }
+    };
+    return D[key] || { title: "", paras: [] };
+  }
+
+  renderVals() {
+    const s = this.state, step = s.step, self = this;
+    const L = window.LA_LEGAL || {};
+    const school = "Sample Career Institute";
+    // Sample programs (prototype). Tuition and fees per year; one term is half.
+    const PROGRAMS = [
+      { id: "p1", name: "Medical Assistant Certificate", year: 18400 },
+      { id: "p2", name: "Welding Technology Diploma", year: 21600 },
+      { id: "p3", name: "Dental Hygiene Associate Degree", year: 26800 }
+    ];
+    const progSel = PROGRAMS.find((x) => x.id === s.programId) || null;
+    const est = progSel ? (s.period === "year" ? progSel.year : progSel.year / 2) : 0;
+    const money = (n) => "$" + Number(n || 0).toLocaleString("en-US");
+    const first = (s.first || "").trim() || "there";
+    const today = new Date().toLocaleDateString("en-US");
+
+    const phoneOk = s.phone.replace(/\D/g, "").length === 10;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s.email);
+    const incNum = Number((s.income || "").replace(/\D/g, ""));
+    const incomeOk = s.incomeYes === false || (s.incomeYes === true && incNum > 0);
+    const ssnOk = s.ssn.replace(/\D/g, "").length === 9;
+    const coPhoneOk = s.coPhone.replace(/\D/g, "").length === 10;
+    const aidNum = Number((s.aid || "").replace(/\D/g, ""));
+    const need = Math.max(0, est - aidNum);
+    const minAmt = Math.min(1000, need);
+    const amt = need > 0 ? Math.max(minAmt, Math.min(s.amount, need)) : 0;
+
+    // Three sample offers (prototype). Payment, APR and total are calculated from the loan amount.
+    // APR assumes a sample 1% origination fee taken from the loan amount.
+    const OFFERS = [
+      { id: "a", tag: "Pay it off fastest", years: 5, rate: 4.49 },
+      { id: "b", tag: "A bit of both", years: 10, rate: 5.49 },
+      { id: "c", tag: "Smallest monthly payment", years: 15, rate: 6.49 }
+    ];
+    const SAMPLE_FEE = 0.01;
+    const pmtOf = (P, r, n) => { const i = r / 1200; return P * i / (1 - Math.pow(1 + i, -n)); };
+    const aprOf = (P, pay, n) => { const target = P * (1 - SAMPLE_FEE); let lo = 0, hi = 0.1; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; const pv = pay * (1 - Math.pow(1 + mid, -n)) / mid; if (pv > target) lo = mid; else hi = mid; } return lo * 1200; };
+    const cents = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    // Prototype: we can approve at most APPROVED_MAX. If the student asked for more, offers are for the approved amount.
+    const APPROVED_MAX = 10000;
+    const partial = !s.fullApproval && amt > APPROVED_MAX;
+    const offerAmt = partial ? APPROVED_MAX : amt;
+    const offerRows = OFFERS.map((o) => {
+      const n = o.years * 12, pay = offerAmt > 0 ? pmtOf(offerAmt, o.rate, n) : 0, on = (s.offerId || "b") === o.id;
+      return {
+        id: o.id, tag: o.tag, on: on, off: !on, cls: on ? "sel" : "",
+        rateText: o.rate.toFixed(2) + "%", aprText: (offerAmt > 0 ? aprOf(offerAmt, pay, n) : o.rate).toFixed(2) + "%",
+        payText: cents(pay), termText: "Paid off in " + o.years + " years", totalText: cents(pay * n),
+        pick: () => self.setState({ offerId: o.id })
+      };
+    });
+    const pickedOffer = offerRows.find((o) => o.on) || offerRows[1];
+    const rate = pickedOffer.rateText;
+    const diff = need;
+    const over = amt > diff;
+    const docsAny = s.docs.id || s.docs.pay || s.docs.bank;
+    const coReady = s.coChoice === "own" || (s.coChoice === "add" && (s.coLater || (s.coName.trim() && coPhoneOk)));
+    const coSent = s.coChoice === "add" && !s.coLater;
+
+    // rail
+    const railDefs = [
+      { name: "1. About you", items: [["start", "Get started"], ["code", "Confirm your phone"]] },
+      { name: "2. Your money", items: [["income", "Income"], ["amount", "Amount"]] },
+      { name: "3. Your rate", items: [["review", "Review"], ["credit", "Credit check"], ["bank", "Bank connection"], ["offer", "Your rate"]] },
+      { name: "4. Finish up", items: [["sign", "School form"], ["mpn", "Loan agreement"], ["tracker", "Status"]] }
+    ];
+    const linear = ["start", "code", "income", "amount", "review", "credit", "bank", "offer", "sign", "mpn", "tracker"];
+    const alias = { loading: "offer", invite: "offer" };
+    const cur = alias[step] || step;
+    const ci = linear.indexOf(cur);
+    let gi = -1;
+    const railGroups = railDefs.map((g, i) => {
+      const items = g.items.map((it) => {
+        const idx = linear.indexOf(it[0]);
+        const done = idx < ci, now = idx === ci;
+        if (now) gi = i;
+        return { label: it[1], done: done, cur: now ? "step" : "false",
+          weight: now ? 700 : 500, color: now ? "#0C3063" : (done ? "#1A2433" : "#5E6879"), bg: now ? "#EAF0FA" : "transparent",
+          ring: done || now ? "#0C3063" : "#C3CAD6", fill: done ? "#0C3063" : "#fff" };
+      });
+      return { name: g.name, items: items, color: "#3F4A5C" };
+    });
+    const names = ["About you", "Your money", "Your rate", "Finish up"];
+    const segs = railDefs.map((g, i) => ({ fill: i < gi ? "100%" : (i === gi ? "55%" : "0%") }));
+    const secs = { start: 40, code: 10, income: 25, amount: 25, review: 10, credit: 15, bank: 30 };
+    const order = ["start", "code", "income", "amount", "review", "credit", "bank"];
+    let timeLeft = "Almost done";
+    const oi = order.indexOf(step);
+    if (oi > -1) {
+      let sum = 0;
+      for (let i = oi; i < order.length; i++) sum += secs[order[i]];
+      timeLeft = "About " + Math.max(1, Math.ceil(sum / 60)) + " min left";
+    }
+
+    const ctaMap = {
+      start: s.role === "student" ? { l: "Continue", d: !(s.first.trim() && s.last.trim() && emailOk && phoneOk && s.cit && s.agree) } : null,
+      code: { l: "Verify", d: s.code.length < 6 },
+      confirm: { l: s.returnTo ? "Save changes" : "Yes, that's me", d: !(this.dobOk() && s.addr && s.cit) },
+      income: { l: coSent && s.coChoice === "add" ? "Continue and text " + (s.coName.trim() || "them") : "Continue", d: !(incomeOk && coReady) },
+      amount: { l: "Continue", d: !(progSel && need > 0 && amt >= minAmt) },
+      review: s.noBank ? { l: "Agree and continue", d: !s.creditOk } : { l: "Agree and connect my bank", d: !(s.creditOk && s.bankOk) },
+      credit: { l: "Continue", d: !!s.ssnNeeded && !ssnOk },
+      bank: { l: "Connect my bank", d: false },
+      offer: s.outcome === "offer" ? { l: "Lock in my " + rate + " rate", d: !(s.hardOk && s.termsOk) } : (s.outcome === "needs" ? { l: s.invited ? "Continue" : "Invite a cosigner", d: false } : { l: "Send to LoanAmerica", d: !docsAny }),
+      invite: s.invited ? { l: "Continue", d: false } : { l: "Send the text", d: !(s.coName.trim() && coPhoneOk) },
+      lockin: { l: "Lock in " + rate, d: !s.hardOk },
+      approved: { l: "Accept my terms", d: !s.termsOk },
+      sign: { l: "Sign and submit", d: !(s.signName.trim().length >= 3 && (!over || s.overAck)) },
+      mpn: { l: "Sign loan agreement", d: !(s.mpnOk && s.mpnSign.trim().length >= 3) }
+    };
+    const cta = ctaMap[step];
+    const demoSteps = ["start", "code", "confirm", "income", "amount", "review", "credit", "bank", "offer", "invite", "lockin", "approved", "sign", "mpn"];
+    const demoFill = () => {
+      const st = self.state.step;
+      if (st === "start") self.setState({ first: "Alex", last: "Rivera", phone: "(555) 555-0123", email: "alex@example.com", cit: "citizen", agree: true });
+      else if (st === "code") { self.setState({ code: "123456" }); self.later(() => self.next(), 250); }
+      else if (st === "confirm") self.setState({ cit: "citizen" });
+      else if (st === "income") self.setState({ incomeYes: true, income: "2,000", coChoice: "own" });
+      else if (st === "amount") self.setState({ programId: self.state.programId || "p1", amount: 99999 });
+      else if (st === "review") self.setState({ creditOk: true, bankOk: true });
+      else if (st === "credit") self.setState({ ssn: "000-00-0000", creditOk: true });
+      else if (st === "bank") self.setState({ bankOk: true });
+      else if (st === "offer") self.setState({ docs: { id: true, pay: true, bank: false }, hardOk: true, termsOk: true });
+      else if (st === "invite") self.setState({ coName: "Jordan", coPhone: "(555) 555-0142" });
+      else if (st === "lockin") self.setState({ hardOk: true });
+      else if (st === "approved") self.setState({ termsOk: true });
+      else if (st === "sign") self.setState({ signName: "Alex Rivera", overAck: true });
+      else if (st === "mpn") self.setState({ mpnOk: true, mpnSign: "Alex Rivera" });
+    };
+
+    const roleOpts = [
+      { label: "I'm the student", on: s.role === "student", cls: s.role === "student" ? "sel" : "", pick: () => self.setState({ role: "student" }) },
+      { label: "I'm a parent or family member helping", on: s.role === "cosigner", cls: s.role === "cosigner" ? "sel" : "", pick: () => self.setState({ role: "cosigner" }) }
+    ];
+    const citLabels = { citizen: "U.S. citizen", national: "U.S. national", resident: "Permanent resident (green card holder)", visa: "Visa holder", other: "Other status" };
+    const citOpts = ["citizen", "national", "resident", "visa", "other"].map((k) => ({ label: citLabels[k], on: s.cit === k, cls: s.cit === k ? "sel" : "", pick: () => self.setState({ cit: k }) }));
+    const incOpts = [
+      { label: "Yes", sub: "From a job, gig work or anything else regular", on: s.incomeYes === true, cls: s.incomeYes === true ? "sel" : "", pick: () => self.setState({ incomeYes: true }) },
+      { label: "No, not right now", sub: "That's common for students", on: s.incomeYes === false, cls: s.incomeYes === false ? "sel" : "", pick: () => self.setState({ incomeYes: false, income: "" }) }
+    ];
+    // Low or no monthly income (under $3,000): highlight "Add a cosigner"
+    const lowIncome = s.incomeYes === false || (s.incomeYes === true && incNum > 0 && incNum < 3000);
+    const coOpts = [
+      { label: "Add a cosigner", rec: lowIncome, on: s.coChoice === "add", cls: (s.coChoice === "add" ? "sel" : "") + (lowIncome ? " rec" : ""), pick: () => self.setState({ coChoice: "add" }) },
+      { label: "I'll apply on my own", rec: false, on: s.coChoice === "own", cls: s.coChoice === "own" ? "sel" : "", pick: () => self.setState({ coChoice: "own" }) }
+    ];
+    const showCoAsk = s.incomeYes === false || (s.incomeYes === true && incNum > 0);
+    const periodOpts = [
+      { label: "Full year", sub: "Fall 2026 and Spring 2027", tag: true, on: s.period === "year", cls: s.period === "year" ? "sel" : "", pick: () => self.setState({ period: "year", amount: 99999, amtDraft: null }) },
+      { label: "One term", sub: "Fall 2026 only", tag: false, on: s.period === "term", cls: s.period === "term" ? "sel" : "", pick: () => self.setState({ period: "term", amount: 99999, amtDraft: null }) }
+    ];
+    const sampleAddrs = [
+      { street: "123 Sample Street", city: "Los Angeles", state: "CA", zip: "90001" },
+      { street: "123 Sample Avenue", city: "Long Beach", state: "CA", zip: "90802" },
+      { street: "123 Sample Boulevard", city: "Garden Grove", state: "CA", zip: "92840" }
+    ];
+    const sugs = sampleAddrs.map((a) => ({ text: a.street + ", " + a.city + ", " + a.state + " " + a.zip, pick: () => self.setState({ addr: a, addrQuery: "", editAddr: false }) }));
+
+    const rows = [
+      { label: "Name, mobile and email", value: (s.first + " " + s.last).trim() + "\n" + s.phone + "\n" + s.email, edit: () => self.edit("start") },
+      { label: "Birthday and citizenship", value: s.dob + " · " + (citLabels[s.cit] || ""), edit: () => self.edit("confirm") },
+      { label: "Address", value: s.addr ? s.addr.street + (s.unit ? ", " + s.unit : "") + ", " + s.addr.city + ", " + s.addr.state + " " + s.addr.zip : "", edit: () => self.edit("confirm") },
+      { label: "Income", value: s.incomeYes ? "$" + s.income + " per month" : "None right now", edit: () => self.edit("income") },
+      { label: "Cosigner", value: s.coChoice === "add" ? (s.coLater ? "I'll invite someone later" : "Adding " + (s.coName.trim() || "someone")) : "Applying on my own", edit: () => self.edit("income") },
+      { label: "Loan amount", value: money(amt) + " for " + (s.period === "year" ? "the full year" : "one term"), edit: () => self.edit("amount") }
+    ];
+
+    const loadLabels = ["Checking your details", "Reading your cash flow", "Finding your rate"];
+    const loadRows = loadLabels.map((l, i) => {
+      const done = s.loadStage > i, now = s.loadStage === i;
+      return { label: l, done: done, bg: done ? "#0C3063" : (now ? "#7C8799" : "#DCE1E9"), color: done || now ? "#1A2433" : "#5E6879" };
+    });
+    const docDefs = [
+      { k: "id", label: "A photo of your ID", sub: "Driver's license or passport" },
+      { k: "pay", label: "Proof of income", sub: "Recent pay stubs or your latest tax return" },
+      { k: "bank", label: "Recent bank statements", sub: "If you couldn't connect your bank" }
+    ];
+    const docRows = docDefs.map((d) => ({
+      label: d.label, sub: d.sub, on: s.docs[d.k], cls: s.docs[d.k] ? "sel" : "", action: s.docs[d.k] ? "Added" : "Add",
+      toggle: () => { const nd = Object.assign({}, self.state.docs); nd[d.k] = !nd[d.k]; self.setState({ docs: nd }); }
+    }));
+
+    let trackRows, trackTitle, trackSub;
+    const mk = (t, sub, st) => ({ title: t, sub: sub, done: st === "done", now: st === "now", bg: st === "done" ? "#0C3063" : "#fff", ring: st === "next" ? "#C3CAD6" : "#0C3063", tcolor: st === "next" ? "#3F4A5C" : "#1A2433" });
+    const co = (s.coName || "your cosigner");
+    const tail = [
+      mk("Final Disclosure", "We send it by text and email. You then have 3 business days to cancel.", "next"),
+      mk("School confirms", "We check with " + school + ". No money is sent before your cancel window ends.", "next"),
+      mk("Funds go to your school", "We pay your school directly.", "next")
+    ];
+    let docsTitle = "Nothing needed right now.";
+    let docsSub = "If we ever need a document, you'll see it here and get a text. You can add it from your computer or your phone.";
+    if (s.outcome === "offer") {
+      trackTitle = "You're in, " + first + ".";
+      trackSub = "Here's what happens next. You can check progress here anytime.";
+      trackRows = [mk("Rate locked", "Fixed at " + rate + ".", "done"), mk("Terms accepted", "Your Approval Disclosure is saved in your account.", "done"), mk("School form signed", "Your school has what it needs from you.", "done"), mk("Loan agreement signed", "Your copy is in your account and your email.", "done")].concat(tail);
+      trackRows[4] = mk("Final Disclosure", "We send it by text and email. You then have 3 business days to cancel.", "now");
+    } else if (s.outcome === "needs") {
+      trackTitle = "Invite sent, " + first + ".";
+      trackSub = "We're waiting on " + co + ". You can check progress here anytime.";
+      trackRows = [mk("Cosigner invited", "We texted " + co + ".", "now"), mk("Cosigner finishes their part", "We'll text you the moment they do.", "next"), mk("Lock in your rate", "A full credit check, only with your OK.", "next"), mk("Accept terms and sign", "You read your terms, then sign your school form and loan agreement.", "next")].concat(tail);
+    } else {
+      trackTitle = "Got it, " + first + ".";
+      trackSub = "We're reviewing what you sent. If we need anything else, we'll tell you here.";
+      trackRows = [mk("Documents received", "Thanks. They're saved in your account.", "done"), mk("We review them", "We'll update this page as soon as we're done.", "now"), mk("Your rate", "You'll see it here as soon as we confirm your details.", "next"), mk("Lock in, accept and sign", "Your credit check, terms, school form and loan agreement.", "next")].concat(tail);
+      docsTitle = "Received. We'll tell you if we need more.";
+      docsSub = "Your ID and proof of income are saved here. You can add more any time.";
+    }
+
+    // assistant
+    const A = window.LA_ASSIST;
+    const mkAsk = (c) => ({ q: c.q, ask: () => self.askNow(c.q, c.id) });
+    const learn = A ? A.learn().map(mkAsk) : [];
+    const noop = () => {};
+    const ai = this.ai ? this.ai.view() : { chatMsgs: [], chips: [], showChips: false, chipsLabel: "", learnGroups: [], tabChat: true, tabLearn: false, tabChatCls: "sel", tabLearnCls: "", goChat: noop, goLearn: noop, listening: false, inputPlaceholder: "Ask your own question", mic: noop, send: noop, onDraft: noop };
+
+    const openSheet = (k) => () => self.setState({ sheet: k });
+    const coAskTitle = "Would you like to add a cosigner?";
+    const coAskSub = lowIncome ? "A parent or family member can cosign with you. It can boost your chances of approval and may get you a lower rate." : "Many students qualify on their own. You can add one if you'd like.";
+    const suggestText = "A cosigner may help you qualify or get a lower rate. If you'd rather go on your own, that's fine. You can add one later if you change your mind.";
+
+    return {
+      is: {
+        start: step === "start", ineligible: step === "ineligible", code: step === "code", confirm: step === "confirm", income: step === "income", amount: step === "amount",
+        review: step === "review", credit: step === "credit", bank: step === "bank", loading: step === "loading",
+        offerA: step === "offer" && s.outcome === "offer", offerB: step === "offer" && s.outcome === "needs", offerC: step === "offer" && s.outcome === "info",
+        invite: step === "invite", lockin: step === "lockin", approved: step === "approved", sign: step === "sign", mpn: step === "mpn", tracker: step === "tracker"
+      },
+      school: school, rate: rate, offerRows: offerRows,
+      amtConfirm: !!s.amtConfirm, closeAmtConfirm: () => self.setState({ amtConfirm: false }),
+      confirmAmt: () => { self._amtOk = true; self.setState({ amtConfirm: false }); self.next(); },
+      partial: partial, offerAmountText: money(offerAmt), requestedText: money(amt), shortText: money(Math.max(0, amt - offerAmt)),
+      partialToggleLabel: partial ? "Prototype: show full approval" : "Prototype: show partial approval",
+      togglePartial: () => self.setState({ fullApproval: !self.state.fullApproval }), first: first, today: today, qr: this.qrPath(),
+      program: progSel ? progSel.name : "your program", finish: "Spring 2027",
+      programChosen: !!progSel, programId: s.programId || "",
+      programOpts: PROGRAMS.map((x) => ({ id: x.id, label: x.name + " (" + money(x.year) + " a year)" })),
+      onProgram: (e) => self.setState({ programId: e.target.value, amount: 99999, amtDraft: null }),
+      showSaved: step !== "start",
+      showRail: step !== "start" && step !== "ineligible",
+      railGroups: railGroups, segs: segs, stageName: gi > -1 ? names[gi] : "", timeLeft: timeLeft,
+      showCta: !!cta && step !== "loading", ctaLabel: cta ? cta.l : "", ctaDisabled: cta ? cta.d : true,
+      showBack: ["ineligible", "code", "confirm", "income", "amount", "review", "credit", "bank", "offer", "invite", "lockin"].indexOf(step) > -1,
+      showDemo: demoSteps.indexOf(step) > -1 && !!cta && cta.d, demoFill: demoFill,
+      back: () => self.back(),
+      submit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const c = ctaMap[self.state.step];
+        if (!c || c.d) return;
+        const st = self.state.step;
+        if (st === "invite" && !self.state.invited) self.setState({ invited: true });
+        else if (st === "income") { if (self.state.coChoice === "add" && !self.state.coLater) self.setState({ invited: true }); self.next(); }
+        else self.next();
+      },
+
+      selOffer: s.outcome === "offer" ? "sel" : "", selNeeds: s.outcome === "needs" ? "sel" : "", selInfo: s.outcome === "info" ? "sel" : "", selSsn: s.ssnNeeded ? "sel" : "",
+      setOffer: () => self.setState({ outcome: "offer" }), setNeeds: () => self.setState({ outcome: "needs" }), setInfo: () => self.setState({ outcome: "info" }),
+      toggleSsnNeeded: () => self.setState({ ssnNeeded: !self.state.ssnNeeded }),
+      h18Paras: (L.h18 ? L.h18.paras : []), consentAParas: (L.consentA ? L.consentA.paras : []), consentBParas: (L.consentB ? L.consentB.paras : []),
+
+      roleOpts: roleOpts, roleStudent: s.role === "student", roleCosigner: s.role === "cosigner",
+      first: s.first, last: s.last,
+      onFirst: (e) => self.setState({ first: e.target.value }), onLast: (e) => self.setState({ last: e.target.value }),
+      cit: s.cit || "", onCit: (e) => self.setState({ cit: e.target.value }),
+      phone: s.phone, onPhone: (e) => self.setState({ phone: self.fmtPhone(e.target.value) }),
+      email: s.email, onEmail: (e) => self.setState({ email: e.target.value }),
+      agree: s.agree, toggleAgree: () => self.setState({ agree: !self.state.agree, discOpen: self.state.agree ? false : self.state.discOpen }),
+      discOpen: s.discOpen, discLocked: !s.agree, discOpacity: s.agree ? 1 : 0.6, discRot: s.discOpen ? 180 : 0,
+      toggleDisc: () => { if (self.state.agree) self.setState({ discOpen: !self.state.discOpen }); },
+      code: s.code,
+      onCode: (e) => { const v = e.target.value.replace(/\D/g, "").slice(0, 6); self.setState({ code: v }); if (v.length === 6) self.later(() => { if (self.state.step === "code") self.next(); }, 350); },
+      resend: () => self.setState({ code: "" }),
+      emailCopyLabel: s.emailCopy ? "Sent to " + (s.email || "your email") : "Email me a copy",
+      emailCopyNow: () => self.setState({ emailCopy: true }),
+      printNow: () => { try { window.print(); } catch (e) {} },
+
+      dob: s.dob, dobShow: s.dob || "Not added", onDob: (e) => self.setState({ dob: self.fmtDob(e.target.value) }),
+      editDob: s.editDob, changeDob: () => self.setState({ editDob: !self.state.editDob }),
+      editAddr: s.editAddr, changeAddr: () => self.setState({ editAddr: !self.state.editAddr }),
+      citOpts: citOpts, citOther: s.cit === "other",
+      addrQuery: s.addrQuery, onAddrQuery: (e) => self.setState({ addrQuery: e.target.value }),
+      showSug: s.editAddr && s.addrQuery.trim().length >= 3, sugs: sugs,
+      addrLine1: s.addr ? s.addr.street + (s.unit ? ", " + s.unit : "") : "", addrLine2: s.addr ? s.addr.city + ", " + s.addr.state + " " + s.addr.zip : "",
+      unit: s.unit, onUnit: (e) => self.setState({ unit: e.target.value }),
+
+      incOpts: incOpts, incYes: s.incomeYes === true,
+      income: s.income, onIncome: (e) => self.setState({ income: self.fmtMoney(e.target.value) }),
+      showCoAsk: showCoAsk, coAskTitle: coAskTitle, coAskSub: coAskSub, coOpts: coOpts,
+      showSuggest: showCoAsk && ((s.incomeYes === false && s.coChoice !== "add") || s.coChoice === "own"), suggestText: suggestText,
+      coAdd: s.coChoice === "add", coLater: s.coLater, coText: !s.coLater,
+      toggleCoLater: () => self.setState({ coLater: !self.state.coLater }),
+
+      estText: money(est), needText: money(need), needNum: Math.max(need, 1), minNum: Math.max(minAmt, 0), minText: money(minAmt),
+      amountText: money(amt), amount: amt, periodOpts: periodOpts,
+      amtDown: () => self.setState({ amount: Math.max(minAmt, amt - 500) }),
+      amtUp: () => self.setState({ amount: Math.min(need, amt + 500) }),
+      onAmount: (e) => self.setState({ amount: Number(e.target.value) }),
+      amountInput: s.amtDraft != null ? s.amtDraft : "$" + Number(amt || 0).toLocaleString("en-US"),
+      onAmountText: (e) => { const d = String(e.target.value).replace(/\D/g, "").slice(0, 7); self.setState({ amtDraft: d ? "$" + Number(d).toLocaleString("en-US") : "$" }); },
+      commitAmount: () => { const d = self.state.amtDraft; if (d == null) return; const n = Number(d.replace(/\D/g, "")); self.setState({ amtDraft: null, amount: Math.min(need, Math.max(minAmt, n || minAmt)) }); },
+      amountKey: (e) => { if (e.key === "Enter") { e.preventDefault(); e.target.blur(); } },
+      needLine: aidNum > 0 ? money(est) + " tuition and fees, minus " + money(aidNum) + " other aid" : "Based on " + money(est) + " tuition and fees",
+      aid: s.aid, onAid: (e) => self.setState({ aid: self.fmtMoney(e.target.value), amount: 99999 }),
+
+      rows: rows,
+      ssnNeeded: s.ssnNeeded, ssn: s.ssn, ssnType: s.ssnShow ? "text" : "password",
+      onSsn: (e) => self.setState({ ssn: self.fmtSsn(e.target.value) }), toggleSsn: () => self.setState({ ssnShow: !self.state.ssnShow }),
+      creditOk: s.creditOk, toggleCredit: () => self.setState({ creditOk: !self.state.creditOk }),
+      expA: s.expA, expALabel: s.expA ? "Hide the full credit consent" : "Read the full credit consent", toggleExpA: () => self.setState({ expA: !self.state.expA }),
+      noBank: !!s.noBank, bankYes: !s.noBank,
+      bankOpts: [
+        { label: "Connect my bank", sub: "Fastest. See your rate right away.", on: !s.noBank, cls: !s.noBank ? "sel" : "", pick: () => self.setState({ noBank: false, outcome: "offer" }) },
+        { label: "Upload documents instead", sub: "Bank statements or pay stubs. Takes longer.", on: !!s.noBank, cls: s.noBank ? "sel" : "", pick: () => self.setState({ noBank: true, bankOk: false, outcome: "info" }) }
+      ],
+      pickNoBank: () => self.setState({ noBank: true, bankOk: false, outcome: "info" }),
+      pickBank: () => self.setState({ noBank: false, outcome: "offer" }),
+      offerCSub: s.noBank ? "Since you didn't connect your bank, send recent bank statements or pay stubs and we'll finish working out your rate." : "We couldn't confirm everything from what you gave us. Send any of these and we'll pick up right where we left off.",
+      bankOk: s.bankOk, toggleBank: () => self.setState({ bankOk: !self.state.bankOk }),
+      expB: s.expB, expBLabel: s.expB ? "Hide the full authorization" : "Read the full authorization", toggleExpB: () => self.setState({ expB: !self.state.expB }),
+
+      loadRows: loadRows, docRows: docRows,
+      coName: s.coName, coPhone: s.coPhone, coNameShow: (s.coName || "there").trim() || "there", notInvited: !s.invited, invited: s.invited,
+      onCoName: (e) => self.setState({ coName: e.target.value }), onCoPhone: (e) => self.setState({ coPhone: self.fmtPhone(e.target.value) }),
+
+      hardOk: s.hardOk, toggleHard: () => self.setState({ hardOk: !self.state.hardOk }),
+      termsOk: s.termsOk, toggleTerms: () => self.setState({ termsOk: !self.state.termsOk }),
+      aidDup: s.aid, diffText: money(diff), over: over, periodLabel: s.period === "year" ? "Fall 2026 and Spring 2027" : "Fall 2026",
+      overAck: s.overAck, toggleOver: () => self.setState({ overAck: !self.state.overAck }),
+      signName: s.signName, onSign: (e) => self.setState({ signName: e.target.value }),
+      mpnOk: s.mpnOk, toggleMpn: () => self.setState({ mpnOk: !self.state.mpnOk }), mpnSign: s.mpnSign, onMpnSign: (e) => self.setState({ mpnSign: e.target.value }),
+      trackRows: trackRows, trackTitle: trackTitle, trackCelebrate: /^You're in/.test(trackTitle), trackSub: trackSub, docsTitle: docsTitle, docsSub: docsSub,
+      offerBTitle: s.invited ? "Your cosigner has our text." : "A cosigner could get you moving.",
+      offerBSub: s.invited ? "We're waiting on " + co + ". You can close this page. We'll text you when they finish." : "It's your choice. A cosigner shares responsibility for the loan. It's often a parent, relative or someone you trust who has steady income.",
+      c2: s.c2, toggleC2: () => self.setState({ c2: !self.state.c2 }),
+      restart: () => self.setState(self.freshState()),
+
+      // GUIDE_OFF: screens where the Guide assistant is removed (separate flow)
+      guideCls: "noguide",
+      asideCls: s.asideOpen ? "open" : "", closeShow: "", closeAside: () => self.setState({ asideOpen: false }), toggleAside: () => self.setState({ asideOpen: !self.state.asideOpen }),
+      typing: s.typing, draft: s.draft, learn: learn,
+      chatMsgs: ai.chatMsgs, chips: ai.chips, showChips: ai.showChips, chipsLabel: ai.chipsLabel, learnGroups: ai.learnGroups,
+      tabChat: ai.tabChat, tabLearn: ai.tabLearn, tabChatCls: ai.tabChatCls, tabLearnCls: ai.tabLearnCls, goChat: ai.goChat, goLearn: ai.goLearn,
+      listening: ai.listening, inputPlaceholder: ai.inputPlaceholder, mic: ai.mic, send: ai.send, onDraft: ai.onDraft,
+      micBg: ai.listening ? "#0C3063" : "#fff", micColor: ai.listening ? "#fff" : "#0C3063",
+
+      sheetOpen: !!s.sheet, sheet: this.sheetData(s.sheet), closeSheet: () => self.setState({ sheet: null }),
+      openPaper: openSheet("paper"), openTerms: openSheet("terms"), openPrivacy: openSheet("privacy"), openCombined: openSheet("combined"),
+      openC2: openSheet("consentC2"), openHard: openSheet("hard"),
+      openH18: openSheet("h18"), openH19: openSheet("h19"), openH20: openSheet("h20"), openSelfCert: openSheet("selfcert"), openMpn: openSheet("mpn"),
+      openSsn: openSheet("ssn"), openCosign: openSheet("cosign"), openAmount: openSheet("amount"), openIncome: openSheet("income"),
+      openTuition: openSheet("tuition"), openAidInfo: openSheet("aidinfo"), openFullYear: openSheet("fullyear"),
+      openFederal: openSheet("federal"), openNoBank: openSheet("nobank"), openWhyDocs: openSheet("whydocs"), openSave: openSheet("save"), openHelp: openSheet("help")
+    };
+  }
+}
+</script>
+</body>
+</html>

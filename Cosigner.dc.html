@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cosigner invited by text</title>
+<script src="./support.js"></script>
+<script src="./legal.js"></script>
+<script src="./assistant.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:30px;line-height:1.12;letter-spacing:-0.01em;color:#0C3063;margin:0}
+.sub{font-size:16px;line-height:1.5;color:#3F4A5C;margin:10px 0 0}
+.lbl{display:block;font-size:14px;font-weight:700;color:#1A2433;margin:0 0 6px}
+.hint{font-size:14px;line-height:1.45;color:#3F4A5C;margin:8px 0 0}
+.inp{width:100%;height:56px;border:1.5px solid #7C8799;border-radius:14px;background:#fff;padding:0 16px;font-family:inherit;font-size:18px;color:#1A2433}
+.inp::placeholder{color:#6B7587}
+.inp:focus{outline:none;border-color:#0C3063;box-shadow:0 0 0 3px rgba(12,48,99,.2)}
+.btn{width:100%;height:56px;border:0;border-radius:16px;background:#0C3063;color:#fff;font-size:17px;font-weight:700}
+.btn:active{transform:scale(.985)}
+.btn:disabled{background:#DCE1E9;color:#5E6879;cursor:not-allowed;transform:none}
+.btn2{width:100%;height:52px;border:1.5px solid #0C3063;border-radius:16px;background:#fff;color:#0C3063;font-size:16px;font-weight:700}
+.btn:focus-visible,.btn2:focus-visible,.link:focus-visible,.iconbtn:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.link{background:none;border:0;padding:0;color:#0C3063;font-size:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.card{background:#fff;border-radius:20px;padding:20px;border:1px solid #E1E5EC}
+.iconbtn{width:48px;height:48px;border:0;background:none;border-radius:24px;display:flex;align-items:center;justify-content:center;color:#0C3063}
+.chk{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:1.5;color:#1A2433}
+.sum{font-size:15px;line-height:1.5;color:#1A2433;display:flex;flex-direction:column;gap:8px}
+.num{width:30px;height:30px;border-radius:15px;background:#0C3063;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.cap{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3F4A5C}
+.chip{border:1.5px solid #0C3063;background:#fff;color:#0C3063;border-radius:16px;padding:10px 14px;font-size:14.5px;font-weight:600;text-align:left;min-height:44px;line-height:1.35}
+.srcbtn{border:1.5px solid #C3CAD6;background:#F5F6F9;color:#0C3063;border-radius:999px;padding:0 14px;min-height:44px;font-size:13.5px;font-weight:700}
+.chip:focus-visible,.srcbtn:focus-visible,.askbtn:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+.askbtn{display:flex;align-items:center;gap:8px;height:48px;padding:0 20px 0 16px;border-radius:24px;border:1.5px solid #0C3063;background:#fff;color:#0C3063;font-size:16px;font-weight:700;box-shadow:0 6px 18px rgba(12,48,99,.22)}
+@keyframes dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.pill{border:1.5px solid #0C3063;background:#fff;color:#0C3063;border-radius:999px;padding:0 16px;height:44px;font-size:15px;font-weight:700}
+.pill.sel{background:#0C3063;color:#fff}
+.choice{width:100%;display:flex;align-items:center;gap:10px;text-align:left;min-height:52px;padding:10px 14px;border-radius:14px;font-size:15px;font-weight:600;line-height:1.35;font-family:inherit}
+.choice.live{border:1.5px solid #0C3063;background:#fff;color:#0C3063}
+.choice.pickd{border:2px solid #0C3063;background:#EAF0FA;color:#0C3063;cursor:default}
+.choice.gone{border:1.5px dashed #C3CAD6;background:transparent;color:#6B7587;cursor:default}
+.choice:focus-visible,.pill:focus-visible{outline:3px solid #C31131;outline-offset:2px}
+input[type=checkbox]{width:26px;height:26px;accent-color:#0C3063;flex:none;margin:0}
+input[type=checkbox]:disabled{opacity:.4}
+@keyframes rise{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.screen{animation:pop .28s ease both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#F5F6F9;display:flex;flex-direction:column;font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:#1A2433">
+
+  <sc-if value="{{ is.sms }}" hint-placeholder-val="{{ true }}">
+    <div class="screen" style="flex:1;display:flex;flex-direction:column;background:#EDEFF3">
+      <div style="height:72px;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border-bottom:1px solid #E1E5EC;font-weight:700;font-size:16px">LoanAmerica</div>
+      <div style="flex:1;padding:24px 16px;display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+        <div style="font-size:12.5px;color:#3F4A5C;align-self:center;margin-bottom:6px">Text message, today</div>
+        <div style="max-width:300px;background:#fff;border-radius:20px;padding:12px 16px;font-size:16px;line-height:1.45">
+          Hi Jordan, Alex asked if you'd be willing to help with a student loan from LoanAmerica. There's no pressure. Open the link to see what it involves. You can say no.
+        </div>
+        <button type="button" onClick="{{ openLink }}" style="max-width:300px;border:0;background:#fff;border-radius:20px;padding:12px 16px;font-size:16px;color:#0C3063;font-weight:700;text-decoration:underline;text-underline-offset:3px;text-align:left;min-height:48px">Open your secure link</button>
+        <div style="margin-top:auto;align-self:center;font-size:13px;color:#3F4A5C;text-align:center;padding:12px">Prototype: this is the text your cosigner receives. Tap the link to continue.</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notSms }}" hint-placeholder-val="{{ false }}">
+    <div style="height:60px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 4px">
+      <div style="width:64px;display:flex;align-items:center">
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+          <button type="button" class="iconbtn" aria-label="Back" onClick="{{ back }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+        </sc-if>
+      </div>
+      <img src="logo.png" alt="LoanAmerica" style="height:34px;width:auto">
+      <div style="width:64px;display:flex;justify-content:flex-end;padding-right:8px">
+        <button type="button" aria-label="Larger text" aria-pressed="{{ big }}" onClick="{{ toggleBig }}" style="width:44px;height:36px;border-radius:12px;border:1.5px solid #0C3063;background:#fff;color:#0C3063;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center">Aa</button>
+      </div>
+    </div>
+
+    <sc-if value="{{ showProgress }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:none;padding:0 20px 4px">
+        <div style="display:flex;gap:6px" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="{{ groupNow }}">
+          <sc-for list="{{ segs }}" as="g" hint-placeholder-count="3">
+            <div style="flex:1;height:5px;border-radius:3px;background:#DCE1E9;overflow:hidden"><div style="height:100%;width:{{ g.fill }};background:#0C3063;border-radius:3px;transition:width .4s ease"></div></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:#3F4A5C;margin-top:8px"><span>{{ stageName }}</span><span>{{ timeLeft }}</span></div>
+      </div>
+    </sc-if>
+
+    <div id="la-scroll" style="flex:1;overflow-y:auto;padding:14px 20px 72px;zoom:{{ zoomVal }}">
+
+      <sc-if value="{{ is.landing }}" hint-placeholder-val="{{ true }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:20px">
+          <div>
+            <h1 class="h1" style="font-size:34px">Alex asked for your help.</h1>
+            <p class="sub">Alex is applying for a student loan and wondered if you'd be willing to be a cosigner. There's no pressure, and it's okay to say no.</p>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;gap:12px;font-size:16px;line-height:1.5">
+            <div class="cap">What cosigning means, in plain words</div>
+            <div>If Alex can't make a payment, you would be asked to. You'd be responsible for the whole loan, not just part of it.</div>
+            <div>The loan would show on your credit report.</div>
+            <div><strong>You don't have to do this.</strong> If you say no, nothing happens to you.</div>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;gap:14px">
+            <div class="cap">What to expect, about 5 minutes</div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">1</div><div style="font-size:16px;line-height:1.4">Read one important notice.</div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">2</div><div style="font-size:16px;line-height:1.4">Check a few details about you. We fill in what we can.</div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><div class="num">3</div><div style="font-size:16px;line-height:1.4">Confirm it's you. You can stop and come back any time.</div></div>
+          </div>
+          <label class="chk">
+            <input type="checkbox" checked="{{ agree }}" onChange="{{ toggleAgree }}">
+            <span>I agree to the <button type="button" class="link" style="font-size:15px" onClick="{{ openTerms }}">Terms of Use</button> and I've been given the <button type="button" class="link" style="font-size:15px" onClick="{{ openPrivacy }}">Privacy Notice</button>. I agree to get my paperwork electronically and to calls and texts about this loan. <button type="button" class="link" style="font-size:15px" onClick="{{ openCombined }}">See what this covers</button></span>
+          </label>
+          <div class="card" style="display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.5">
+            <div><strong>Would you rather talk to someone?</strong> A real person can walk you through it. <button type="button" class="link" style="font-size:15px" onClick="{{ openHelp }}">Talk to a person</button></div>
+            <div style="color:#3F4A5C">You can also ask someone you trust to sit with you. The decision is yours.</div>
+          </div>
+          <div style="font-size:15px;line-height:1.5;color:#3F4A5C">Want bigger text? Tap Aa at the top.</div>
+          <button type="button" class="link" style="font-size:15px;align-self:flex-start;min-height:44px" onClick="{{ openNo }}">I'd rather not</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.notice }}" hint-placeholder-val="{{ false }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:20px">
+          <div>
+            <h1 class="h1">Read this before you decide.</h1>
+            <p class="sub">This notice is required by federal rules. It is separate from your loan agreement.</p>
+          </div>
+          <div class="card" style="font-size:16px;line-height:1.55;font-weight:700;white-space:pre-line;color:#1A2433">{{ noticeText }}</div>
+          <label class="chk">
+            <input type="checkbox" checked="{{ noticeOk }}" onChange="{{ toggleNotice }}">
+            <span>I've read this Notice to Cosigner.</span>
+          </label>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.you }}" hint-placeholder-val="{{ false }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:22px">
+          <div>
+            <h1 class="h1">Is this you, {{ firstName }}?</h1>
+            <p class="sub">We filled in what we could. Fix anything that's off.</p>
+          </div>
+          <div class="card" style="padding:4px 20px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #E1E5EC">
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:#3F4A5C">Name</div><div style="font-size:17px;font-weight:600">{{ name }}</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #E1E5EC">
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:#3F4A5C">Date of birth</div><div style="font-size:17px;font-weight:600">{{ dob }}</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 0">
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:#3F4A5C">Home address</div><div style="font-size:17px;font-weight:600;line-height:1.35">{{ addr }}</div></div>
+            </div>
+          </div>
+          <button type="button" class="link" style="font-size:15px;align-self:flex-start;min-height:44px" onClick="{{ openFix }}">Something's not right</button>
+          <div>
+            <label class="lbl" for="c-email">Email</label>
+            <input id="c-email" class="inp" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value="{{ email }}" onChange="{{ onEmail }}">
+            <p class="hint">We'll email you a copy of what you agree to.</p>
+          </div>
+          <p class="hint" style="margin:0">Prototype: sample details filled from your phone number. Which fields can be prefilled depends on the identity vendor.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.home }}" hint-placeholder-val="{{ false }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:22px">
+          <div>
+            <h1 class="h1">About your income.</h1>
+            <p class="sub">This helps us see how the loan would work. A rough number is fine.</p>
+          </div>
+          <div>
+            <label class="lbl" for="c-inc">About how much do you receive each year, before taxes?</label>
+            <div style="position:relative">
+              <span style="position:absolute;left:16px;top:0;height:56px;display:flex;align-items:center;font-size:18px;color:#3F4A5C" aria-hidden="true">$</span>
+              <input id="c-inc" class="inp" type="text" inputmode="numeric" placeholder="48,000" value="{{ income }}" onChange="{{ onIncome }}" style="padding-left:34px">
+            </div>
+            <p class="hint">Count a job, Social Security, a pension, retirement income or other regular income. You don't have to include alimony, child support or separate maintenance unless you want us to consider it.</p>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.ssn }}" hint-placeholder-val="{{ false }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:20px">
+          <div>
+            <h1 class="h1">One last step.</h1>
+            <p class="sub">We need your Social Security number to finish confirming it's you.</p>
+          </div>
+          <div>
+            <label class="lbl" for="c-ssn">Social Security number</label>
+            <div style="position:relative">
+              <input id="c-ssn" class="inp" type="{{ ssnType }}" inputmode="numeric" autocomplete="off" placeholder="000-00-0000" value="{{ ssn }}" onChange="{{ onSsn }}" style="padding-right:64px">
+              <button type="button" class="iconbtn" aria-label="Show or hide number" onClick="{{ toggleSsn }}" style="position:absolute;right:4px;top:4px">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <p class="hint"><button type="button" class="link" style="font-size:14px" onClick="{{ openSsnWhy }}">Why we ask for this</button></p>
+          </div>
+          <label class="chk">
+            <input type="checkbox" checked="{{ creditOk }}" onChange="{{ toggleCredit }}">
+            <span>I authorize LoanAmerica to check my credit with a soft inquiry and to verify what I've told you. If we can't confirm something, we may ask for more information or documents. <button type="button" class="link" style="font-size:15px" onClick="{{ openCredit }}">Read the full credit consent</button></span>
+          </label>
+          <div style="font-size:15px;line-height:1.5;font-weight:700;color:#1A2433">This soft check will not affect your credit score. [Soft or hard check to be confirmed.]</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is.done }}" hint-placeholder-val="{{ false }}">
+        <div class="screen" style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;padding-top:24px">
+          <div style="width:72px;height:72px;border-radius:36px;background:#0C3063;color:#fff;display:flex;align-items:center;justify-content:center">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </div>
+          <h1 class="h1">Thanks, {{ firstName }}.</h1>
+          <p class="sub" style="margin:0">We let Alex know you're done. That was the whole thing for now.</p>
+          <div class="card" style="align-self:stretch;font-size:15px;line-height:1.5;color:#1A2433">Nothing is final yet. Your cosigner paperwork comes later, once Alex locks in a rate, and you'll read and sign it yourself. You can still change your mind until then. If we need anything else, we'll text you.</div>
+          <button type="button" class="link" style="font-size:14px;color:#3F4A5C;min-height:44px" onClick="{{ restart }}">Prototype: start over</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tipsShow }}" hint-placeholder-val="{{ false }}">
+        <div class="card" style="margin-top:20px;display:flex;flex-direction:column;gap:10px">
+          <div class="cap">Worth asking</div>
+          <sc-for list="{{ tips }}" as="t" hint-placeholder-count="2">
+            <button type="button" class="chip" onClick="{{ t.ask }}">{{ t.q }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+    </div>
+
+    <sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:none;background:#fff;border-top:1px solid #E1E5EC;padding:12px 20px 24px;display:flex;flex-direction:column;gap:6px">
+        <button type="button" class="btn" disabled="{{ ctaDisabled }}" onClick="{{ onCta }}">{{ ctaLabel }}</button>
+        <sc-if value="{{ showDemo }}" hint-placeholder-val="{{ false }}">
+          <button type="button" class="link" style="font-size:13px;font-weight:600;color:#3F4A5C;align-self:center;min-height:36px" onClick="{{ demoFill }}">Prototype: fill this step for me</button>
+        </sc-if>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ showAsk }}" hint-placeholder-val="{{ false }}">
+    <button type="button" class="askbtn" onClick="{{ openChat }}" style="position:absolute;right:16px;bottom:{{ askBottom }}px;z-index:15">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg>
+      Ask
+    </button>
+  </sc-if>
+
+  <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:25;display:flex;flex-direction:column;justify-content:flex-end">
+      <button type="button" aria-label="Close assistant" onClick="{{ closeChat }}" style="position:absolute;inset:0;border:0;background:rgba(10,20,40,.5);animation:fade .2s ease both"></button>
+      <div role="dialog" aria-modal="true" aria-label="Ask LoanAmerica" style="position:relative;background:#F5F6F9;border-radius:24px 24px 0 0;height:90%;display:flex;flex-direction:column;animation:rise .28s ease both">
+        <div style="width:40px;height:5px;border-radius:3px;background:#C3CAD6;margin:10px auto 0"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 8px 6px 20px;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="22" fill="#0C3063"/><circle cx="16" cy="19" r="2.4" fill="#fff"/><circle cx="28" cy="19" r="2.4" fill="#fff"/><path d="M14.5 27c2 3.2 4.4 4.5 7.5 4.5s5.5-1.3 7.5-4.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <div>
+              <div style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:22px;color:#0C3063;line-height:1.1">Guide</div>
+              <div style="font-size:12.5px;line-height:1.35;color:#3F4A5C">AI assistant. It explains and helps you ask good questions. It does not make credit decisions.</div>
+            </div>
+          </div>
+          <button type="button" class="iconbtn" aria-label="Close" onClick="{{ closeChat }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+        <div style="display:flex;gap:8px;padding:4px 16px 8px" role="tablist">
+          <button type="button" role="tab" class="pill {{ tabChatCls }}" aria-selected="{{ tabChat }}" onClick="{{ goChat }}">Chat</button>
+          <button type="button" role="tab" class="pill {{ tabLearnCls }}" aria-selected="{{ tabLearn }}" onClick="{{ goLearn }}">Learn</button>
+        </div>
+        <sc-if value="{{ tabChat }}" hint-placeholder-val="{{ true }}">
+        <div id="la-chat" aria-live="polite" style="flex:1;overflow-y:auto;padding:8px 16px;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="2">
+            <sc-if value="{{ m.isUser }}" hint-placeholder-val="{{ false }}">
+              <div style="align-self:flex-end;max-width:85%;background:#0C3063;color:#fff;border-radius:18px 18px 4px 18px;padding:10px 14px;font-size:15.5px;line-height:1.45">{{ m.text }}</div>
+            </sc-if>
+            <sc-if value="{{ m.isBot }}" hint-placeholder-val="{{ true }}">
+              <div style="align-self:flex-start;max-width:96%;background:#fff;border:1px solid #E1E5EC;border-radius:18px 18px 18px 4px;padding:12px 14px;font-size:15.5px;line-height:1.5;display:flex;flex-direction:column;gap:10px">
+                <div style="white-space:pre-line">{{ m.text }}</div>
+                <sc-if value="{{ m.hasHeads }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#F5F6F9;border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45"><strong style="color:#0C3063">Heads up. </strong>{{ m.heads }}</div>
+                </sc-if>
+                <sc-if value="{{ m.hasSrc }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+                    <div style="font-size:12px;font-weight:700;color:#3F4A5C">Where this comes from</div>
+                    <sc-for list="{{ m.srcs }}" as="x" hint-placeholder-count="1">
+                      <button type="button" class="srcbtn" onClick="{{ x.open }}">{{ x.label }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ m.hasChoices }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div class="cap">Worth asking next</div>
+                    <sc-for list="{{ m.choices }}" as="c" hint-placeholder-count="2">
+                      <button type="button" class="choice {{ c.cls }}" disabled="{{ c.faded }}" onClick="{{ c.ask }}">
+                        <span style="flex:1">{{ c.q }}</span>
+                        <sc-if value="{{ c.picked }}" hint-placeholder-val="{{ false }}">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C3063" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                        </sc-if>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ m.actionPending }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button type="button" class="btn" style="width:auto;padding:0 20px;height:48px;font-size:15.5px" onClick="{{ m.actionYesGo }}">{{ m.actionYes }}</button>
+                    <button type="button" class="btn2" style="width:auto;padding:0 20px;height:48px" onClick="{{ m.actionNoGo }}">{{ m.actionNo }}</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ m.handoff }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" class="btn2" onClick="{{ openHelp }}">Talk to a person</button>
+                </sc-if>
+                <sc-if value="{{ m.showFb }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#3F4A5C">
+                    <sc-if value="{{ m.fbNone }}" hint-placeholder-val="{{ true }}">
+                      <span>Was this helpful?</span>
+                      <button type="button" class="iconbtn" aria-label="Helpful" onClick="{{ m.fbYes }}" style="width:44px;height:44px">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-7c1.5 0 2.5 1 2.2 2.6L12.8 9H19a2 2 0 011.9 2.6l-2 6.4A2 2 0 0117 19H7"/></svg>
+                      </button>
+                      <button type="button" class="iconbtn" aria-label="Not helpful" onClick="{{ m.fbNo }}" style="width:44px;height:44px">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate(180deg)"><path d="M7 11v9H4v-9h3zM7 11l4-7c1.5 0 2.5 1 2.2 2.6L12.8 9H19a2 2 0 011.9 2.6l-2 6.4A2 2 0 0117 19H7"/></svg>
+                      </button>
+                    </sc-if>
+                    <sc-if value="{{ m.fbUp }}" hint-placeholder-val="{{ false }}"><span>Thanks. That helps us improve.</span></sc-if>
+                    <sc-if value="{{ m.fbDown }}" hint-placeholder-val="{{ false }}"><span>Thanks for telling us. Want a person to help? <button type="button" class="link" style="font-size:13px" onClick="{{ openHelp }}">Talk to a person</button></span></sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </sc-for>
+          <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
+            <div role="status" aria-label="Guide is typing" style="align-self:flex-start;background:#fff;border:1px solid #E1E5EC;border-radius:18px 18px 18px 4px;padding:14px 16px;display:flex;gap:5px">
+              <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s infinite"></span>
+              <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s .2s infinite"></span>
+              <span style="width:8px;height:8px;border-radius:4px;background:#0C3063;animation:dot 1.2s .4s infinite"></span>
+            </div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ showChips }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:6px 0 0;display:flex;flex-direction:column;gap:8px">
+            <div class="cap" style="padding:0 16px">{{ chipsLabel }}</div>
+            <div style="display:flex;gap:8px;overflow-x:auto;padding:0 16px 4px">
+              <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+                <button type="button" class="chip" onClick="{{ c.ask }}" style="flex:none;width:236px">{{ c.q }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <form onSubmit="{{ send }}" style="display:flex;gap:8px;padding:10px 16px 6px">
+          <label for="la-ask-in" style="position:absolute;left:-9999px">Ask a question</label>
+          <button type="button" class="iconbtn" aria-label="Speak your question" aria-pressed="{{ listening }}" onClick="{{ mic }}" style="width:52px;height:52px;flex:none;border:1.5px solid #0C3063;background:{{ micBg }};color:{{ micColor }}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>
+          </button>
+          <input id="la-ask-in" class="inp" type="text" autocomplete="off" placeholder="{{ inputPlaceholder }}" value="{{ draft }}" onChange="{{ onDraft }}" style="height:52px;font-size:16px">
+          <button type="submit" class="btn" style="width:80px;height:52px;flex:none;font-size:16px">Send</button>
+        </form>
+        <div style="padding:0 16px 20px;font-size:12px;line-height:1.45;color:#3F4A5C">I can make mistakes, so check the documents I point to. Never type your SSN or bank login here. This chat is saved with the application. [Retention to be set.]</div>
+        </sc-if>
+        <sc-if value="{{ tabLearn }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1;overflow-y:auto;padding:8px 16px 24px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:15px;line-height:1.5;color:#3F4A5C">Short answers to the questions people ask most. Tap one and Guide walks you through it.</div>
+            <sc-for list="{{ learnGroups }}" as="g" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div class="cap">{{ g.title }}</div>
+                <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                  <button type="button" class="choice live" onClick="{{ it.ask }}"><span style="flex:1">{{ it.q }}</span></button>
+                </sc-for>
+              </div>
+            </sc-for>
+            <div style="font-size:13px;line-height:1.45;color:#3F4A5C">More guides are coming to [LEARN_NAME].</div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;justify-content:flex-end">
+      <button type="button" aria-label="Close" onClick="{{ closeSheet }}" style="position:absolute;inset:0;border:0;background:rgba(10,20,40,.5);animation:fade .2s ease both"></button>
+      <div role="dialog" aria-modal="true" aria-label="{{ sheet.title }}" style="position:relative;background:#fff;border-radius:24px 24px 0 0;max-height:86%;display:flex;flex-direction:column;animation:rise .28s ease both">
+        <div style="width:40px;height:5px;border-radius:3px;background:#C3CAD6;margin:10px auto 0"></div>
+        <div style="padding:16px 24px 8px;overflow:auto">
+          <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:24px;line-height:1.2;margin:0 0 14px;color:#0C3063">{{ sheet.title }}</h2>
+          <sc-for list="{{ sheet.paras }}" as="p" hint-placeholder-count="2">
+            <div style="margin:0 0 14px">
+              <div style="font-weight:700;font-size:15px;color:#1A2433;margin-bottom:2px">{{ p.h }}</div>
+              <div style="font-size:15px;line-height:1.55;color:#3F4A5C;white-space:pre-line">{{ p.b }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:8px 24px 26px"><button type="button" class="btn" onClick="{{ closeSheet }}">Got it</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = this.freshState();
+    this.timers = [];
+    this.ai = window.LA_ASSIST ? window.LA_ASSIST.controller(this, { openKey: "chatOpen", chatId: "la-chat", screenKey: () => this.screenKey(), phone: () => "(555) 555-0142" }) : null;
+  }
+  freshState() {
+    return { step: "sms", big: false, agree: false, noticeOk: false, name: "", email: "", dob: "", addr: "", income: "", ssn: "", ssnShow: false, creditOk: false, sheet: null, chatOpen: false, msgs: [], typing: false, draft: "", tab: "chat", listening: false };
+  }
+  componentWillUnmount() { this.timers.forEach(clearTimeout); }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+
+  screenKey() { return "c_" + this.state.step; }
+  openChat() { if (this.ai) this.ai.open(); }
+  askNow(q, id) { if (this.ai) this.ai.ask(q, id); }
+
+  fmtDob(v) {
+    const d = v.replace(/\D/g, "").slice(0, 8);
+    if (d.length < 3) return d;
+    if (d.length < 5) return d.slice(0, 2) + "/" + d.slice(2);
+    return d.slice(0, 2) + "/" + d.slice(2, 4) + "/" + d.slice(4);
+  }
+  fmtSsn(v) {
+    const d = v.replace(/\D/g, "").slice(0, 9);
+    if (d.length < 4) return d;
+    if (d.length < 6) return d.slice(0, 3) + "-" + d.slice(3);
+    return d.slice(0, 3) + "-" + d.slice(3, 5) + "-" + d.slice(5);
+  }
+  fmtMoney(v) {
+    const d = v.replace(/\D/g, "").slice(0, 7);
+    return d ? Number(d).toLocaleString("en-US") : "";
+  }
+  dobOk() {
+    const d = this.state.dob.replace(/\D/g, "");
+    if (d.length !== 8) return false;
+    const m = +d.slice(0, 2), dd = +d.slice(2, 4), y = +d.slice(4);
+    return m >= 1 && m <= 12 && dd >= 1 && dd <= 31 && y >= 1930 && y <= 2010;
+  }
+  go(step) {
+    this.setState({ step: step, sheet: null });
+    if (step === "you" && !this.state.name) this.setState({ name: "Jordan Rivera", dob: "03/15/1956", addr: "123 Sample Street, Los Angeles, CA 90001" });
+    this.later(() => { const el = document.getElementById("la-scroll"); if (el) el.scrollTop = 0; }, 0);
+  }
+  next() {
+    const map = { sms: "landing", landing: "notice", notice: "you", you: "home", home: "ssn", ssn: "done" };
+    const n = map[this.state.step];
+    if (n) this.go(n);
+  }
+  back() {
+    const prev = { notice: "landing", you: "notice", home: "you", ssn: "home" };
+    const p = prev[this.state.step];
+    if (p) this.go(p);
+  }
+  sheetData(key) {
+    const L = window.LA_LEGAL || {};
+    if (L[key]) return { title: L[key].title, paras: L[key].paras || [] };
+    const D = {
+      help: { title: "Talk to a person", paras: [
+        { h: "Ways to reach us", b: "[Support channels and hours supplied by operations.]" }
+      ] },
+      fix: { title: "If something's not right", paras: [
+        { h: "Tell us what to change", b: "Tap Talk to a person and we'll fix it with you. [Edit fields to be added once the prefill source is chosen.]" }
+      ] },
+      no: { title: "No problem", paras: [
+        { h: "What happens", b: "We'll let Alex know you chose not to cosign. Nothing changes for you, and we won't contact you about this loan again." }
+      ] }
+    };
+    return D[key] || { title: "", paras: [] };
+  }
+  renderVals() {
+    const s = this.state, step = s.step, self = this;
+    const L = window.LA_LEGAL || {};
+    const nameOk = s.name.trim().length > 2;
+    const addrOk = s.addr.trim().length > 8;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s.email);
+    const ssnOk = s.ssn.replace(/\D/g, "").length === 9;
+    const incOk = Number((s.income || "").replace(/\D/g, "")) > 0;
+
+    const groups = [["landing", "notice"], ["you", "home"], ["ssn"]];
+    const names = ["Read", "About you", "Confirm"];
+    let gi = -1;
+    groups.forEach((g, i) => { if (g.indexOf(step) > -1) gi = i; });
+    const segs = groups.map((g, i) => {
+      let fill = "0%";
+      if (i < gi) fill = "100%";
+      else if (i === gi) fill = Math.round(((g.indexOf(step) + 1) / g.length) * 100) + "%";
+      return { fill: fill };
+    });
+    const left = { landing: "About 3 min left", notice: "About 2 min left", you: "About 2 min left", home: "About 1 min left", ssn: "Almost done" };
+
+    const ctaMap = {
+      landing: { l: "Continue", d: !s.agree },
+      notice: { l: "I understand, continue", d: !s.noticeOk },
+      you: { l: "Yes, that's me", d: !(nameOk && emailOk && this.dobOk() && addrOk) },
+      home: { l: "Continue", d: !incOk },
+      ssn: { l: "Submit", d: !(ssnOk && s.creditOk) }
+    };
+    const cta = ctaMap[step];
+
+    const demoFill = () => {
+      const st = self.state.step;
+      if (st === "landing") self.setState({ agree: true });
+      else if (st === "notice") self.setState({ noticeOk: true });
+      else if (st === "you") self.setState({ email: "jordan@example.com" });
+      else if (st === "home") self.setState({ income: "48,000" });
+      else if (st === "ssn") self.setState({ ssn: "000-00-0000", creditOk: true });
+    };
+    const openSheet = (k) => () => self.setState({ sheet: k });
+    const firstName = (s.name || "").trim().split(" ")[0] || "Jordan";
+    const noopf = () => {};
+
+    const A = window.LA_ASSIST;
+    const sk = this.screenKey();
+    const mkAsk = (c) => ({ q: c.q, ask: () => self.askNow(c.q, c.id) });
+    const tips = A ? A.tips(sk).map(mkAsk) : [];
+    const noop = () => {};
+    const ai = this.ai ? this.ai.view() : { chatMsgs: [], chips: [], showChips: false, chipsLabel: "", learnGroups: [], tabChat: true, tabLearn: false, tabChatCls: "sel", tabLearnCls: "", goChat: noop, goLearn: noop, listening: false, inputPlaceholder: "Ask your own question", mic: noop, send: noop, onDraft: noop };
+
+    return {
+      is: { sms: step === "sms", landing: step === "landing", notice: step === "notice", you: step === "you", home: step === "home", ssn: step === "ssn", done: step === "done" },
+      notSms: step !== "sms",
+      showBack: ["notice", "you", "home", "ssn"].indexOf(step) > -1,
+            showProgress: step !== "sms" && step !== "done",
+      segs: segs, groupNow: gi + 1, stageName: gi > -1 ? names[gi] : "", timeLeft: (left[step] || "") + (["you", "home", "ssn"].indexOf(step) > -1 ? " · Saved" : ""),
+      back: () => self.back(),
+      openLink: () => self.go("landing"),
+
+      big: s.big, toggleBig: () => self.setState({ big: !self.state.big }), zoomVal: s.big ? 1.18 : 1,
+      agree: s.agree, toggleAgree: () => self.setState({ agree: !self.state.agree }),
+      noticeText: L.cosignerNotice ? L.cosignerNotice.text : "[Notice to Cosigner]",
+      noticeOk: s.noticeOk, toggleNotice: () => self.setState({ noticeOk: !self.state.noticeOk }),
+
+      name: s.name, email: s.email, dob: s.dob, addr: s.addr, income: s.income,
+      onName: (e) => self.setState({ name: e.target.value }),
+      onEmail: (e) => self.setState({ email: e.target.value }),
+      onDob: (e) => self.setState({ dob: self.fmtDob(e.target.value) }),
+      onAddr: (e) => self.setState({ addr: e.target.value }),
+      onIncome: (e) => self.setState({ income: self.fmtMoney(e.target.value) }),
+
+      ssn: s.ssn, ssnType: s.ssnShow ? "text" : "password",
+      onSsn: (e) => self.setState({ ssn: self.fmtSsn(e.target.value) }),
+      toggleSsn: () => self.setState({ ssnShow: !self.state.ssnShow }),
+      creditOk: s.creditOk, toggleCredit: () => self.setState({ creditOk: !self.state.creditOk }),
+
+      firstName: firstName,
+      restart: () => self.setState(self.freshState()),
+
+      showCta: !!cta, ctaLabel: cta ? cta.l : "", ctaDisabled: cta ? cta.d : true,
+      onCta: () => self.next(),
+      showDemo: !!cta && cta.d, demoFill: demoFill,
+
+      showAsk: false, // Guide assistant removed (separate flow)
+      askBottom: cta ? (cta.d ? 152 : 116) : 28,
+      chatOpen: s.chatOpen, typing: s.typing, draft: s.draft,
+      chatMsgs: ai.chatMsgs, chips: ai.chips, showChips: ai.showChips, chipsLabel: ai.chipsLabel, learnGroups: ai.learnGroups,
+      tabChat: ai.tabChat, tabLearn: ai.tabLearn, tabChatCls: ai.tabChatCls, tabLearnCls: ai.tabLearnCls, goChat: ai.goChat, goLearn: ai.goLearn,
+      listening: ai.listening, inputPlaceholder: ai.inputPlaceholder, mic: ai.mic, send: ai.send, onDraft: ai.onDraft,
+      micBg: ai.listening ? "#0C3063" : "#fff", micColor: ai.listening ? "#fff" : "#0C3063",
+      tips: tips, tipsShow: false,
+      openChat: () => self.openChat(),
+      closeChat: () => self.setState({ chatOpen: false }),
+
+      sheetOpen: !!s.sheet, sheet: this.sheetData(s.sheet), closeSheet: () => self.setState({ sheet: null }),
+      openCombined: openSheet("ccombined"), openFix: openSheet("fix"), openSsnWhy: openSheet("ssn"), openTerms: openSheet("terms"), openPrivacy: openSheet("privacy"),
+      openCredit: openSheet("consentA"), openNo: openSheet("no"), openHelp: openSheet("help")
+    };
+  }
+}
+</script>
+</body>
+</html>
